@@ -82,7 +82,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
               Contact
               <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </button>
-            <a href="/JEEVITH%20resume.pdf.pdf" download className={`px-3 py-2 border-2 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 text-xs ${darkMode ? 'border-white text-white hover:bg-white hover:text-black' : 'border-black text-black hover:bg-black hover:text-white'}`}> <Download className="w-4 h-4" /> CV </a>
+            <a href="/Portfolio-0.2-/JEEVITH%20resume.pdf.pdf" download className={`px-3 py-2 border-2 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 text-xs ${darkMode ? 'border-white text-white hover:bg-white hover:text-black' : 'border-black text-black hover:bg-black hover:text-white'}`}> <Download className="w-4 h-4" /> CV </a>
           </div>
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-xs md:max-w-md mx-auto md:mx-0">
@@ -107,7 +107,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
               <div className={`w-full h-full rounded-full ${darkMode ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center`}>
                 <div className="w-full h-full rounded-full border-4 border-orange-400 shadow-[0_0_24px_8px_#fb923c99] flex items-center justify-center transition-all duration-300 animate-blink-border">
                   <img
-                    src="/pic%20p.png"
+                    src="/Portfolio-0.2-/pic%20p.png"
                     alt="Profile"
                     className="w-full h-full object-cover rounded-full select-none animate-pop-float animate-float-shake"
                     draggable="false"

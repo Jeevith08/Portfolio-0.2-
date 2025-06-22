@@ -89,7 +89,7 @@ const CertificateSection: React.FC<{ darkMode?: boolean }> = ({ darkMode: initia
                   onClick={() => openModal(idx)}
                 >
                   <img
-                    src={`/certificate/${file}`}
+                    src={`/Portfolio-0.2-/certificate/${file}`}
                     alt={file}
                     className="w-full h-full object-cover rounded-xl"
                     style={{ boxShadow: '0 0 4px 1px #fb923c33' }}
@@ -117,7 +117,7 @@ const CertificateSection: React.FC<{ darkMode?: boolean }> = ({ darkMode: initia
                   onClick={() => openModal(verticalFiles.length + idx)}
                 >
                   <img
-                    src={`/certificate/${file}`}
+                    src={`/Portfolio-0.2-/certificate/${file}`}
                     alt={file}
                     className="w-full h-full object-cover rounded-2xl"
                     style={{ boxShadow: '0 0 4px 1px #fb923c33' }}
@@ -163,7 +163,7 @@ const CertificateSection: React.FC<{ darkMode?: boolean }> = ({ darkMode: initia
             onClick={e => e.stopPropagation()}
           >
             <img
-              src={`/certificate/${allFiles[modalIndex]}`}
+              src={`/Portfolio-0.2-/certificate/${allFiles[modalIndex]}`}
               alt={allFiles[modalIndex]}
               className="max-h-[90vh] max-w-[90vw] rounded-2xl shadow-2xl border-4"
               style={{ borderColor: '#fb923c', boxShadow: '0 0 32px 8px #fb923c88' }}
