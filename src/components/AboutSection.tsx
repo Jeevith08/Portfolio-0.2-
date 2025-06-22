@@ -1,6 +1,5 @@
 import React from 'react';
 import { User, Award, Coffee, TrendingUp, Calendar, Heart } from 'lucide-react';
-import profilePic from '../../pic 1.png';
 
 interface AboutSectionProps {
   darkMode: boolean;
@@ -12,14 +11,14 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
       id="about"
       className={`scroll-mt-20 md:scroll-mt-40 min-h-screen w-full flex items-center justify-center px-4 md:px-0 bg-transparent`}
     >
-      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
         {/* Left: Circular Profile Image */}
-        <div className="flex flex-col items-center lg:items-start justify-center flex-shrink-0 w-full lg:w-1/2 h-full relative lg:ml-32">
+        <div className="flex flex-col items-center lg:items-start justify-center flex-shrink-0 w-full lg:w-auto">
           <div className="relative">
             {/* Orange gradient border, glow, pop animation */}
             <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 p-2 shadow-[0_0_40px_#ff9800aa] flex items-center justify-center animate-pop-float relative">
               <div className={`w-full h-full rounded-full ${darkMode ? 'bg-[#181818]' : 'bg-white'} flex items-center justify-center overflow-hidden`}>
-                <img src={profilePic} alt="Jeevith" className="w-full h-full object-cover" style={{ objectPosition: 'center 5%' }} />
+                <img src={`${import.meta.env.BASE_URL}pic 1.png`} alt="Jeevith" className="w-full h-full object-cover" style={{ objectPosition: 'center 5%' }} />
               </div>
               {/* Sparkle effects outside the circle */}
               <span className="absolute -left-4 md:-left-6 top-4 md:top-6 animate-sparkle1 animate-blink text-sm md:text-base">✨</span>
@@ -29,9 +28,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
           </div>
         </div>
         {/* Right: Floating Card with About Content */}
-        <div className="flex-1 flex justify-center lg:justify-end w-full lg:w-1/2 h-full items-center">
-          <div className={`rounded-3xl shadow-2xl p-4 md:p-6 max-w-lg w-full relative ${darkMode ? 'bg-[#232323]' : 'bg-white/90'}`}> 
-            <div className="mb-4 flex items-center gap-3">
+        <div className="flex-1 flex justify-center w-full lg:w-auto">
+          <div className={`rounded-3xl shadow-2xl p-4 md:p-6 max-w-lg w-full relative text-center lg:text-left ${darkMode ? 'bg-[#232323]' : 'bg-white/90'}`}> 
+            <div className="mb-4 flex items-center justify-center lg:justify-start gap-3">
               <span className={`inline-block rounded-full p-2 shadow bg-gradient-to-tr from-orange-500 to-red-500 text-white`}>
                 <User className="w-5 h-5 md:w-6 md:h-6" />
               </span>

@@ -79,7 +79,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
 
   return (
     <section id="skills" className={`min-h-screen py-20 px-4 flex items-center justify-center bg-transparent`}>
-      <div className="max-w-5xl w-full mx-auto">
+      <div className="max-w-5xl w-full mx-auto px-4 md:px-0">
         {/* Heading & Tagline */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-2">

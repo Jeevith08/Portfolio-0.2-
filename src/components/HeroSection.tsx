@@ -42,7 +42,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
     <section id="hero" className={`min-h-screen flex items-center justify-center relative px-4 pt-20 pb-10 md:px-6 md:pt-0 md:pb-0 bg-transparent`}>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 w-full">
         {/* Left: Main Content */}
-        <div className="flex-1 text-center md:text-left order-2 md:order-1 mt-4 md:mt-0 md:pl-32">
+        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1 mt-4 md:mt-0 md:pl-32">
           <p className={`text-base mb-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Hello, I'm</p>
           <h1 className="text-4xl md:text-6xl mb-2 font-great-vibes" style={{ color: '#fb923c' }}>
             Jeevith
@@ -101,7 +101,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
           </div>
         </div>
         {/* Right: Profile Photo */}
-        <div className="flex-1 flex justify-center order-1 md:order-2 -mt-12 md:mt-0 md:justify-end">
+        <div className="flex-1 flex justify-center order-1 md:order-2 mt-8 md:mt-0 md:justify-end">
           <div className="relative">
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden bg-gradient-to-br from-red-500 to-orange-400 p-1 sparkle-container">
               <div className={`w-full h-full rounded-full ${darkMode ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center`}>
