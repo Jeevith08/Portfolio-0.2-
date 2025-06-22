@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Github, Briefcase, Star } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
-import p1 from '../../p1.png';
-import p2 from '../../p2.png';
-import p3 from '../../p3.png';
 
 interface ProjectsSectionProps {
   darkMode: boolean;
@@ -18,7 +15,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
       id: 1,
       title: "Personal Portfolio",
       description: `A clean, beginner-friendly portfolio showcasing my projects, skills, certifications, and achievements as an engineering student.`,
-      image: p1,
+      image: `${import.meta.env.BASE_URL}p1.png`,
       tech: ["HTML", "CSS", "JS"],
       category: "Web Application",
       github: "https://github.com/Jeevith08/jeevith_portfolio"
@@ -27,7 +24,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
       id: 2,
       title: "Portfolio Craft",
       description: `A no-code platform to design personalized, stunning portfolios with real-time templates.Perfect for students, freelancers, and professionals to showcase their work.`,
-      image: p2,
+      image: `${import.meta.env.BASE_URL}p2.png`,
       tech: ["HTML", "CSS", "OpenAI", "JS"],
       category: "AI Portfolio craft",
       github: "https://github.com/Jeevith08/Porfolio-Craft"
@@ -36,7 +33,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
       id: 3,
       title: "Personal Portfolio 0.2 ",
       description: `An interactive, AI-powered portfolio where a robot avatar welcomes you and guides you through out full web..`,
-      image: p3,
+      image: `${import.meta.env.BASE_URL}p3.png`,
       tech: ["React 18","Vite","Tailwind CSS","shadcn/ui","Three.js","React Router","GSAP"],
       category: "Portfolio 0.2",
       github: "https://github.com"
