@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useGLTF, Center } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
+import * as THREE from 'three';
 
 interface PageLoaderProps {
   onComplete: () => void;
@@ -61,5 +65,28 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
     </div>
   );
 };
+
+function Model() {
+  const { scene } = useGLTF('/Portfolio-0.2-/robot_playground.glb');
+  
+  // Create a custom material for the outline effect
+  const outlineMaterial = new THREE.MeshBasicMaterial({ color: '#FF4500', side: THREE.BackSide });
+
+  // Apply material to all meshes
+  scene.traverse((child) => {
+    if ((child as THREE.Mesh).isMesh) {
+      const outlineMesh = (child as THREE.Mesh).clone();
+      outlineMesh.material = outlineMaterial;
+      outlineMesh.scale.multiplyScalar(1.05); // Adjust outline thickness
+      child.parent?.add(outlineMesh);
+    }
+  });
+
+  return (
+    <Center>
+      <primitive object={scene} scale={[2, 2, 2]} />
+    </Center>
+  );
+}
 
 export default PageLoader;
