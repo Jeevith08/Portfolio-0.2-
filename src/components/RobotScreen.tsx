@@ -50,7 +50,7 @@ interface RobotScreenProps {
 }
 
 function RobotModel({ rotation = { x: 0, y: 0 }, scale = [1.5, 1.5, 1.5], floating = false }) {
-  const gltf = useGLTF('/robot_playground.glb');
+  const gltf = useGLTF('robot_playground.glb');
   const meshRef = useRef<THREE.Group>(null);
   const { actions, names } = useAnimations(gltf.animations, gltf.scene);
 
