@@ -67,7 +67,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
 };
 
 function Model() {
-  const { scene } = useGLTF('robot_playground.glb');
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}robot_playground.glb`);
   
   // Create a custom material for the outline effect
   const outlineMaterial = new THREE.MeshBasicMaterial({ color: '#FF4500', side: THREE.BackSide });
