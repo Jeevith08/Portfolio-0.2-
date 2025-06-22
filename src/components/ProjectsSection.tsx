@@ -36,7 +36,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
       image: `${import.meta.env.BASE_URL}p3.png`,
       tech: ["React 18","Vite","Tailwind CSS","shadcn/ui","Three.js","React Router","GSAP"],
       category: "Portfolio 0.2",
-      github: "https://github.com"
+      github: "https://github.com/Jeevith08/Portfolio-0.2-"
     },
     
   ];

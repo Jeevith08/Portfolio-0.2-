@@ -84,15 +84,6 @@ const Journey: React.FC<JourneyProps> = ({ darkMode }) => {
                   </li>
                 ))}
               </ul>
-              <div className="flex justify-end mt-4">
-                <button
-                  type="button"
-                  onClick={() => navigate('/certificate')}
-                  className={`px-3 py-1 text-xs rounded-full border border-orange-500 bg-orange-500 text-white cursor-pointer transition-colors duration-300 ${blink ? 'animate-blink-once' : ''} hover:bg-orange-600 dark:hover:bg-orange-900/30`}
-                >
-                  Certifications
-                </button>
-              </div>
             </div>
           </ScrollReveal>
           <ScrollReveal direction="right" className="w-full md:w-1/2">

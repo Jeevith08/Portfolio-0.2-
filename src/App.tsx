@@ -7,7 +7,6 @@ import RobotScreen from "./components/RobotScreen";
 import Index from "./pages/Index";
 import Skills from "./pages/Skills";
 import Projects from "./pages/Projects";
-import CertificateSection from "./pages/CertificateSection";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactForm from "./components/ContactForm";
 import ChatBot from "./components/ChatBot";
@@ -105,7 +104,6 @@ const App = () => {
         <Toaster />
         <Sonner position="top-right" toastOptions={{ style: { marginTop: '1.5rem' } }}/>
           <Routes>
-            <Route path="/certificate" element={<CertificateSection />} />
             <Route path="/*" element={renderSection()} />
           </Routes>
         {currentSection && (

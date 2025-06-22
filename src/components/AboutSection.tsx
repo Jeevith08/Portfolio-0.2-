@@ -18,7 +18,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
             {/* Orange gradient border, glow, pop animation */}
             <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 p-2 shadow-[0_0_40px_#ff9800aa] flex items-center justify-center animate-pop-float relative">
               <div className={`w-full h-full rounded-full ${darkMode ? 'bg-[#181818]' : 'bg-white'} flex items-center justify-center overflow-hidden`}>
-                <img src={`${import.meta.env.BASE_URL}pic 1.png`} alt="Jeevith" className="w-full h-full object-cover" style={{ objectPosition: 'center 5%' }} />
+                <img src={`${import.meta.env.BASE_URL}pic 1.png`} alt="Jeevith" className="w-full h-full object-cover" style={{ objectPosition: 'center 0%' }} />
               </div>
               {/* Sparkle effects outside the circle */}
               <span className="absolute -left-4 md:-left-6 top-4 md:top-6 animate-sparkle1 animate-blink text-sm md:text-base">✨</span>

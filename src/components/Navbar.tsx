@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Moon, Sun, Globe, Home, User, Code2, Gift, Mail, Rocket, ArrowLeft } from 'lucide-react';
+import { Menu, X, Moon, Sun, Globe, Home, User, Code2, Gift, Mail, Rocket, ArrowLeft, Palette, Zap } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface NavbarProps {
@@ -9,6 +9,17 @@ interface NavbarProps {
   language: string;
   toggleLanguage: () => void;
   onBackToRobot?: () => void;
+  currentColorScheme: number;
+  autoColorSwitch: boolean;
+  toggleAutoColorSwitch: () => void;
+  cycleColorScheme: () => void;
+  colorSchemes: Array<{
+    name: string;
+    primary: string;
+    secondary: string;
+    accent: string;
+    gradient: string;
+  }>;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ 
@@ -17,7 +28,12 @@ const Navbar: React.FC<NavbarProps> = ({
   currentSection, 
   language, 
   toggleLanguage,
-  onBackToRobot
+  onBackToRobot,
+  currentColorScheme,
+  autoColorSwitch,
+  toggleAutoColorSwitch,
+  cycleColorScheme,
+  colorSchemes
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

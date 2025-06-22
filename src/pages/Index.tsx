@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
+import StatusSection from '../components/StatusSection';
 import Journey from './Journey';
 import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
@@ -18,15 +19,39 @@ interface IndexProps {
   toggleDarkMode: () => void;
 }
 
+const colorSchemes = [
+  { name: 'Default', primary: '#FFA552', secondary: '#FFD6B8', accent: '#FF8C00', gradient: 'from-red-500 to-orange-400' },
+  { name: 'Forest', primary: '#228B22', secondary: '#90EE90', accent: '#32CD32', gradient: 'from-green-500 to-lime-400' },
+  { name: 'Ocean', primary: '#1E90FF', secondary: '#ADD8E6', accent: '#4169E1', gradient: 'from-blue-500 to-cyan-400' },
+  { name: 'Sunset', primary: '#FF4500', secondary: '#FFDAB9', accent: '#FF6347', gradient: 'from-red-500 to-yellow-400' },
+  { name: 'Lavender', primary: '#9370DB', secondary: '#E6E6FA', accent: '#8A2BE2', gradient: 'from-purple-500 to-indigo-400' },
+];
+
 const Index = ({ onBackToRobot, darkMode, toggleDarkMode }: IndexProps) => {
   const [currentSection, setCurrentSection] = useState('hero');
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem('language') || 'EN';
   });
+  const [currentColorScheme, setCurrentColorScheme] = useState(0);
+  const [autoColorSwitch, setAutoColorSwitch] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('language', language);
   }, [language]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (autoColorSwitch) {
+      interval = setInterval(() => {
+        cycleColorScheme();
+      }, 5000); // Switch every 5 seconds
+    }
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [autoColorSwitch]);
 
   // Enable smooth scrolling
   useEffect(() => {
@@ -72,6 +97,12 @@ const Index = ({ onBackToRobot, darkMode, toggleDarkMode }: IndexProps) => {
         }, wait);
       }
     };
+  };
+
+  const toggleAutoColorSwitch = () => setAutoColorSwitch(prev => !prev);
+
+  const cycleColorScheme = () => {
+    setCurrentColorScheme(prev => (prev + 1) % colorSchemes.length);
   };
 
   const toggleLanguage = () => {
@@ -123,6 +154,11 @@ const Index = ({ onBackToRobot, darkMode, toggleDarkMode }: IndexProps) => {
           language={language}
           toggleLanguage={toggleLanguage}
           onBackToRobot={onBackToRobot}
+          currentColorScheme={currentColorScheme}
+          autoColorSwitch={autoColorSwitch}
+          toggleAutoColorSwitch={toggleAutoColorSwitch}
+          cycleColorScheme={cycleColorScheme}
+          colorSchemes={colorSchemes}
         />
         
         <main className="scroll-smooth">
@@ -131,6 +167,9 @@ const Index = ({ onBackToRobot, darkMode, toggleDarkMode }: IndexProps) => {
           </ScrollReveal>
           <ScrollReveal>
             <AboutSection darkMode={darkMode} />
+          </ScrollReveal>
+          <ScrollReveal>
+            <StatusSection darkMode={darkMode} />
           </ScrollReveal>
           <Journey darkMode={darkMode} />
           <SkillsSection darkMode={darkMode} />
