@@ -84,7 +84,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/Portfolio-0.2-/">
       {/* Global Sparkle Background */}
       <div className="sparkle-bg" aria-hidden="true">
         {sparkles.map(sparkle => (
