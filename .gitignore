@@ -43,6 +43,5 @@ lerna-debug.log*
 # Public assets that should not be in git
 /public/Downloads/
 /public/certificate/
-/public/Events/
 *.exe
 *.docx
