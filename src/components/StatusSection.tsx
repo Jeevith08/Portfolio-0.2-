@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
 import { Plus, X, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -31,6 +31,18 @@ interface StatusSectionProps {
 const StoryModal = ({ onClose, images, darkMode }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
+  useEffect(() => {
+    const handleScroll = () => {
+      onClose();
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [onClose]);
+
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -40,10 +52,13 @@ const StoryModal = ({ onClose, images, darkMode }) => {
   }, [emblaApi]);
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm ${darkMode ? 'bg-black/80' : 'bg-white/80'}`} onClick={onClose}>
+    <div className={`fixed inset-0 z-[60] flex items-center justify-center backdrop-blur-sm ${darkMode ? 'bg-black/80' : 'bg-white/80'}`} onClick={onClose}>
       <button
-        className={`absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full transition-colors ${darkMode ? 'bg-white/10 text-white hover:bg-orange-500' : 'bg-black/10 text-black hover:bg-orange-500 hover:text-white'}`}
-        onClick={onClose}
+        className={`absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full transition-colors ${darkMode ? 'bg-white/10 text-white hover:bg-orange-500' : 'bg-black/10 text-black hover:bg-orange-500 hover:text-white'}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
       >
         <X size={24} />
       </button>
@@ -67,13 +82,19 @@ const StoryModal = ({ onClose, images, darkMode }) => {
         
         <button
           className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full transition-colors ${darkMode ? 'bg-white/10 text-white hover:bg-orange-500' : 'bg-black/10 text-black hover:bg-orange-500 hover:text-white'}`}
-          onClick={scrollPrev}
+          onClick={(e) => {
+            e.stopPropagation();
+            scrollPrev();
+          }}
         >
           <ArrowLeft size={24} />
         </button>
         <button
           className={`absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full transition-colors ${darkMode ? 'bg-white/10 text-white hover:bg-orange-500' : 'bg-black/10 text-black hover:bg-orange-500 hover:text-white'}`}
-          onClick={scrollNext}
+          onClick={(e) => {
+            e.stopPropagation();
+            scrollNext();
+          }}
         >
           <ArrowRight size={24} />
         </button>
@@ -89,7 +110,7 @@ const StatusSection: React.FC<StatusSectionProps> = ({ darkMode }) => {
   const eventImages = ['Events/E1.jpeg', 'Events/E2.jpeg', 'Events/E3.jpeg', 'Events/E4.jpeg', 'Events/E5.jpeg', 'Events/E6.jpeg', 'Events/E7.jpeg', 'Events/E8.jpeg'];
   const arpImages = ['ARP.jpeg'];
   const certificateImages = [
-    'certificate/c1.jpg', 'certificate/c2.jpg', 'certificate/c3.jpg', 'certificate/c4.png', 'certificate/c5.png', 
+    'certificate/A1.jpg', 'certificate/c1.jpg', 'certificate/c2.jpg', 'certificate/c3.jpg', 'certificate/c4.png', 'certificate/c5.png',
     'certificate/c6.jpg', 'certificate/c7.jpg', 'certificate/c7.png', 'certificate/c8.png', 'certificate/c9.png', 
     'certificate/c10.png', 'certificate/c11.png'
   ];

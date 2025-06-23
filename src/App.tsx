@@ -83,37 +83,39 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="/Portfolio-0.2-/">
-      {/* Global Sparkle Background */}
-      <div className="sparkle-bg" aria-hidden="true">
-        {sparkles.map(sparkle => (
-          <span
-            key={sparkle.key}
-            className="sparkle-dot"
-            style={{
-              top: `${sparkle.top}%`,
-              left: `${sparkle.left}%`,
-              width: `${sparkle.size}px`,
-              height: `${sparkle.size}px`,
-              animationDelay: `${sparkle.delay}s`,
-            }}
-          />
-        ))}
+      <div className="overflow-x-hidden">
+        <BrowserRouter basename="/Portfolio-0.2-/">
+        {/* Global Sparkle Background */}
+        <div className="sparkle-bg" aria-hidden="true">
+          {sparkles.map(sparkle => (
+            <span
+              key={sparkle.key}
+              className="sparkle-dot"
+              style={{
+                top: `${sparkle.top}%`,
+                left: `${sparkle.left}%`,
+                width: `${sparkle.size}px`,
+                height: `${sparkle.size}px`,
+                animationDelay: `${sparkle.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner position="top-right" toastOptions={{ style: { marginTop: '1.5rem' } }}/>
+            <Routes>
+              <Route path="/*" element={renderSection()} />
+            </Routes>
+          {currentSection && (
+            <>
+              <ChatBot darkMode={darkMode} onOpenContactForm={() => setShowContactForm(true)} />
+              {showContactForm && <ContactForm darkMode={darkMode} onClose={() => setShowContactForm(false)} />}
+            </>
+          )}
+        </TooltipProvider>
+        </BrowserRouter>
       </div>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner position="top-right" toastOptions={{ style: { marginTop: '1.5rem' } }}/>
-          <Routes>
-            <Route path="/*" element={renderSection()} />
-          </Routes>
-        {currentSection && (
-          <>
-            <ChatBot darkMode={darkMode} onOpenContactForm={() => setShowContactForm(true)} />
-            {showContactForm && <ContactForm darkMode={darkMode} onClose={() => setShowContactForm(false)} />}
-          </>
-        )}
-      </TooltipProvider>
-      </BrowserRouter>
     </QueryClientProvider>
   );
 };

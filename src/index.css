@@ -21,7 +21,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: none;
-  @apply bg-white dark:bg-black transition-colors duration-300;
+  @apply bg-white dark:bg-black transition-colors duration-300 overflow-x-hidden;
 }
 
 /* Custom Cursor with Sparkle Effect */

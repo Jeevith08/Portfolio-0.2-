@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect, Suspense, useMemo } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Preload, useAnimations, Center } from '@react-three/drei';
 import * as THREE from 'three';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Sun, Moon, Home, Zap, Rocket, Mail, ArrowLeft } from 'lucide-react';
+import { Sun, Moon, Home, Zap, Rocket, Mail, ArrowLeft, Rotate3d, Rotate3D } from 'lucide-react';
 import CustomCursor from './CustomCursor';
 import PageLoader from './PageLoader';
 import { createPortal } from 'react-dom';
@@ -49,40 +49,26 @@ interface RobotScreenProps {
   toggleDarkMode: () => void;
 }
 
-function RobotModel({ rotation = { x: 0, y: 0 }, scale = [1.5, 1.5, 1.5], floating = false }) {
+function RobotModel({ targetRotation, floating = false }: { targetRotation?: React.RefObject<{ x: number, y: number }>, floating?: boolean }) {
   const gltf = useGLTF(`${import.meta.env.BASE_URL}robot_playground.glb`);
   const meshRef = useRef<THREE.Group>(null);
   const { actions, names } = useAnimations(gltf.animations, gltf.scene);
 
-  // Floating animation for mobile only
-  useEffect(() => {
-    if (!floating) return;
-    let frameId: number;
-    const animate = () => {
-      if (meshRef.current) {
-        meshRef.current.rotation.y += 0.005;
-      }
-      frameId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => cancelAnimationFrame(frameId);
-  }, [floating]);
-
-  // Mouse rotation for desktop
-  useEffect(() => {
-    if (floating) return;
-    if (meshRef.current) {
-      meshRef.current.rotation.x = rotation.x;
-      meshRef.current.rotation.y = rotation.y;
-    }
-  }, [rotation, floating]);
-
-  // Play all GLB animations if present
   useEffect(() => {
     if (actions && names.length > 0) {
       names.forEach(name => actions[name]?.play());
     }
   }, [actions, names]);
+  
+  useFrame(() => {
+    if (!meshRef.current) return;
+    if (floating) {
+      meshRef.current.rotation.y += 0.005; // Simple rotation for floating
+    } else if (targetRotation?.current) {
+      meshRef.current.rotation.x = lerp(meshRef.current.rotation.x, targetRotation.current.x, 0.05);
+      meshRef.current.rotation.y = lerp(meshRef.current.rotation.y, targetRotation.current.y, 0.05);
+    }
+  });
 
   if (!gltf.scene) {
     return (
@@ -94,7 +80,7 @@ function RobotModel({ rotation = { x: 0, y: 0 }, scale = [1.5, 1.5, 1.5], floati
   }
 
   return (
-    <Center position={[1, 2, 1]}>
+    <Center position={[0, 2, 0]}>
       <primitive
         object={gltf.scene}
         ref={meshRef}
@@ -112,10 +98,7 @@ export default function RobotScreen({ onNavigate, robotState, setRobotState, dar
   const [greetingText, setGreetingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showError, setShowError] = useState(false);
-  // Mouse rotation state for desktop
-  const [robotRotation, setRobotRotation] = useState({ x: 0, y: 0 });
   const targetRotation = useRef({ x: 0, y: 0 });
-  const currentRotation = useRef({ x: 0, y: 0 });
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 
   // Detect if mobile
@@ -166,49 +149,20 @@ export default function RobotScreen({ onNavigate, robotState, setRobotState, dar
     { id: 'contact', icon: <Mail className="w-7 h-7" />, description: 'Get in touch with me' }
   ];
 
-  // Mouse move handler for desktop
-  useEffect(() => {
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (isMobile) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    targetRotation.current.y = ((x / rect.width) - 0.5) * Math.PI * 0.5;
+    targetRotation.current.x = ((y / rect.height) - 0.5) * Math.PI * 0.2;
+  };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const robotArea = document.getElementById('robot-canvas-area');
-      if (!robotArea) return;
-      const rect = robotArea.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      // Normalize to [-1, 1]
-      const nx = (x / rect.width) * 2 - 1;
-      const ny = (y / rect.height) * 2 - 1;
-      // Clamp and scale
-      const maxX = 0.5; // up/down
-      const maxY = 1.0; // left/right
-      targetRotation.current = {
-        x: -ny * maxX,
-        y: nx * maxY,
-      };
-    };
-    
-    const robotArea = document.getElementById('robot-canvas-area');
-    if (robotArea) {
-      robotArea.addEventListener('mousemove', handleMouseMove);
-    }
-    
-    let animationFrameId: number;
-    const animate = () => {
-      currentRotation.current.x = lerp(currentRotation.current.x, targetRotation.current.x, 0.05);
-      currentRotation.current.y = lerp(currentRotation.current.y, targetRotation.current.y, 0.05);
-      setRobotRotation(currentRotation.current);
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      if (robotArea) {
-        robotArea.removeEventListener('mousemove', handleMouseMove);
-      }
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [isMobile]);
+  const handlePointerOut = () => {
+    if (isMobile) return;
+    targetRotation.current.x = 0;
+    targetRotation.current.y = 0;
+  };
 
   // Contact form state
   const [contactForm, setContactForm] = useState({
@@ -286,69 +240,41 @@ export default function RobotScreen({ onNavigate, robotState, setRobotState, dar
 
   return (
     <>
-      <div className={`relative w-screen h-screen overflow-hidden`}>
-        <div className={`fixed inset-0 w-full h-full bg-transparent ${darkMode ? 'dark' : ''} relative z-20`}>
-          <CustomCursor />
-          {/* Dark/Light mode toggle */}
-          <button
-            className="fixed top-6 right-8 z-50 bg-black/20 dark:bg-white/10 p-2 rounded-full shadow hover:bg-orange-500 hover:text-white transition-colors"
-            onClick={toggleDarkMode}
-            aria-label="Toggle dark mode"
+      <div className={`relative w-screen h-screen overflow-hidden ${darkMode ? 'dark' : ''}`}>
+        <CustomCursor />
+        {/* Dark/Light mode toggle */}
+        <button
+          className="fixed top-6 right-8 z-50 bg-black/20 dark:bg-white/10 p-2 rounded-full shadow hover:bg-orange-500 hover:text-white transition-colors"
+          onClick={toggleDarkMode}
+          aria-label="Toggle dark mode"
+        >
+          {darkMode ? <Sun className="w-6 h-6 text-orange-400" /> : <Moon className="w-6 h-6 text-gray-700" />}
+        </button>
+        {/* Jeevi. name in top-left */}
+        <div className="fixed top-6 left-8 z-40 select-none">
+          <span className="text-4xl md:text-6xl font-great-vibes tracking-widest text-orange-500">Jeevi<span className="text-red-500">.</span></span>
+        </div>
+        {/* Layout container */}
+        <div className="w-full h-full flex flex-col md:flex-row">
+          {/* Robot canvas takes full screen on mobile, half on desktop */}
+          <div
+            id="robot-canvas-area"
+            className="relative w-full h-full md:w-1/2"
+            onPointerMove={!isMobile ? handlePointerMove : undefined}
+            onPointerOut={!isMobile ? handlePointerOut : undefined}
           >
-            {darkMode ? <Sun className="w-6 h-6 text-orange-400" /> : <Moon className="w-6 h-6 text-gray-700" />}
-          </button>
-          {/* Jeevi. name in top-left */}
-          <div className="fixed top-6 left-8 z-40 select-none">
-            <span className="text-4xl md:text-6xl font-great-vibes tracking-widest text-orange-500">Jeevi<span className="text-red-500">.</span></span>
-          </div>
-          {/* Robot covers left half, floating animation (responsive, fully visible) */}
-          <div className="z-10">
-            {/* Desktop: left half, mouse-rotating, large, fully visible */}
-            <div
-              id="robot-canvas-area"
-              className="hidden md:flex absolute left-0 top-0 w-[60vw] h-full items-center justify-center overflow-visible z-30 pointer-events-auto"
-              style={isMobile ? floatAnim : {}}
-            >
-              <Canvas camera={{ position: [0, 0, 10], fov: 55 }} className="w-full h-full" style={{overflow: 'visible'}}>
-                <ambientLight intensity={0.7} />
-                <pointLight position={[10, 10, 10]} intensity={1.2} />
-                <pointLight position={[-10, -10, -10]} intensity={0.7} color="#fb923c" />
-                <Suspense fallback={
-                  <mesh>
-                    <boxGeometry args={[1, 1, 1]} />
-                    <meshStandardMaterial color="#fb923c" />
-                  </mesh>
-                }>
-                  <RobotModel rotation={robotRotation} floating={false} />
-                </Suspense>
+            <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
+              <ambientLight intensity={0.7} />
+              <pointLight position={[10, 10, 10]} intensity={1.2} />
+              <pointLight position={[-10, -10, -10]} intensity={0.7} color="#fb923c" />
+              <Suspense fallback={null}>
+                <RobotModel targetRotation={targetRotation} floating={isMobile} />
                 <Preload all />
-              </Canvas>
-            </div>
-            {/* Mobile: centered, smaller, floating, fully visible */}
-            <div
-              className="md:hidden absolute inset-0 flex items-center justify-center"
-              style={floatAnim}
-            >
-              <div className="w-96 h-96 opacity-70">
-                <Canvas camera={{ position: [0, 0, 8], fov: 60 }} className="w-full h-full" style={{overflow: 'visible'}}>
-                  <ambientLight intensity={0.7} />
-                  <pointLight position={[10, 10, 10]} intensity={1.2} />
-                  <pointLight position={[-10, -10, -10]} intensity={0.7} color="#fb923c" />
-                  <Suspense fallback={
-                    <mesh>
-                      <boxGeometry args={[1, 1, 1]} />
-                      <meshStandardMaterial color="#fb923c" />
-                    </mesh>
-                  }>
-                    <RobotModel floating={true} />
-                  </Suspense>
-                  <Preload all />
-                </Canvas>
-              </div>
-            </div>
+              </Suspense>
+            </Canvas>
           </div>
-          {/* Chat/question text floating near robot's head, smaller font */}
-          <div className="absolute inset-x-0 bottom-16 md:inset-x-auto md:top-1/2 md:-translate-y-1/2 md:bottom-auto md:right-0 z-20 flex flex-col items-center md:items-end w-full md:w-auto max-w-full md:max-w-[40vw] px-4 md:px-0 md:pr-16">
+          {/* UI elements container */}
+          <div className="absolute inset-0 md:relative md:w-1/2 md:h-full flex flex-col items-center justify-end md:justify-center text-center p-4">
             <div className="relative">
               {/* Animated question/greeting */}
               {currentStep === 'greeting' && (

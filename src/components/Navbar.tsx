@@ -61,90 +61,94 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-50 w-full flex items-center justify-between px-8">
-      {/* Logo/Name Left */}
-      <div className="flex items-center">
-        {/* Back Button in front of logo/name, left-aligned */}
-        {typeof onBackToRobot === 'function' && (
-          <button
-            onClick={onBackToRobot}
-            aria-label="Back to Robot"
-            className="w-6 h-6 flex items-center justify-center rounded-full border-2 border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/30 shadow hover:shadow-orange-400 transition-all duration-300 mr-2"
-          >
-            <ArrowLeft className="w-3 h-3" />
-          </button>
-        )}
-      <div className="text-2xl font-bold pointer-events-auto">
-        <span className={darkMode ? 'text-gray-200 font-great-vibes tracking-widest' : 'text-gray-700 font-great-vibes tracking-widest'}>Jeevi</span>
-        <span className="font-great-vibes tracking-widest" style={{ color: '#FFA552' }}>.</span>
-        </div>
-      </div>
-      <div className="flex items-center gap-2">
-        {/* Desktop Menu */}
-        <div className={`hidden md:flex items-center rounded-full shadow-lg px-4 py-1.5 space-x-3 max-w-md pointer-events-auto transition-colors duration-300 ${darkMode ? 'bg-[#232323]/80 backdrop-blur-md' : 'bg-white/80 backdrop-blur-md'}`}> 
-          {navItems.map((item) => (
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full">
+      <div className="relative flex items-center justify-between px-4 py-2 md:px-6">
+        {/* Logo/Name Left */}
+        <div className="flex items-center">
+          {/* Back Button */}
+          {typeof onBackToRobot === 'function' && (
             <button
-              key={item.name}
-              onClick={() => scrollToSection(item.href)}
-              className={`text-sm font-medium transition-colors duration-200 px-2 py-1 rounded-full focus:outline-none focus:ring-2 ${
-                darkMode
-                  ? 'focus:ring-orange-900'
-                  : 'focus:ring-orange-200'
-              } ${
-                currentSection === item.href.slice(1)
-                  ? 'bg-gradient-to-r from-red-500 to-orange-400 text-transparent bg-clip-text'
-                  : darkMode
-                    ? 'text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-orange-400 hover:text-transparent hover:bg-clip-text active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text'
-                    : 'text-gray-700 hover:bg-gradient-to-r hover:from-red-500 hover:to-orange-400 hover:text-transparent hover:bg-clip-text active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text'
-              } ${item.name === 'Home' ? '' : ''}`}
+              onClick={onBackToRobot}
+              aria-label="Back to Robot"
+              className="w-6 h-6 flex items-center justify-center rounded-full border-2 border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/30 shadow hover:shadow-orange-400 transition-all duration-300 mr-2"
             >
-              {item.name}
+              <ArrowLeft className="w-3 h-3" />
             </button>
-          ))}
-          {/* Dark Mode Toggle */}
+          )}
+          <div className="text-2xl font-bold pointer-events-auto">
+            <span className={darkMode ? 'text-gray-200 font-great-vibes tracking-widest' : 'text-gray-700 font-great-vibes tracking-widest'}>Jeevi</span>
+            <span className="font-great-vibes tracking-widest" style={{ color: '#FFA552' }}>.</span>
+          </div>
+        </div>
+
+        {/* Right side items */}
+        <div className="flex items-center gap-2">
+          {/* Desktop Menu */}
+          <div className={`hidden md:flex items-center rounded-full shadow-lg px-4 py-1.5 space-x-3 max-w-md pointer-events-auto transition-colors duration-300 ${darkMode ? 'bg-[#232323]/80 backdrop-blur-md' : 'bg-white/80 backdrop-blur-md'}`}>
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => scrollToSection(item.href)}
+                className={`text-sm font-medium transition-colors duration-200 px-2 py-1 rounded-full focus:outline-none focus:ring-2 ${
+                  darkMode
+                    ? 'focus:ring-orange-900'
+                    : 'focus:ring-orange-200'
+                } ${
+                  currentSection === item.href.slice(1)
+                    ? 'bg-gradient-to-r from-red-500 to-orange-400 text-transparent bg-clip-text'
+                    : darkMode
+                      ? 'text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-orange-400 hover:text-transparent hover:bg-clip-text active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text'
+                      : 'text-gray-700 hover:bg-gradient-to-r hover:from-red-500 hover:to-orange-400 hover:text-transparent hover:bg-clip-text active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text'
+                } ${item.name === 'Home' ? '' : ''}`}
+              >
+                {item.name}
+              </button>
+            ))}
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className={`p-2 rounded-full transition-colors flex items-center justify-center ${darkMode ? 'bg-[#a63a13] hover:bg-[#ff4500] text-white' : 'bg-[#ff4500] hover:bg-[#a63a13] text-white'}`}
+            >
+              <span className="w-4 h-4 flex items-center justify-center">
+                {darkMode
+                  ? <Sun className="w-4 h-4 transition-all duration-200 active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text" />
+                  : <Moon className="w-4 h-4 transition-all duration-200 active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text" />
+                }
+              </span>
+            </button>
+          </div>
+          {/* Translate Button */}
           <button
-            onClick={toggleDarkMode}
-            className={`p-2 rounded-full transition-colors flex items-center justify-center ${darkMode ? 'bg-[#a63a13] hover:bg-[#ff4500] text-white' : 'bg-[#ff4500] hover:bg-[#a63a13] text-white'}`}
+            onClick={() => toast.info('Sorry..! Translator will update soon...', {
+              duration: 500,
+              style: {
+                borderLeft: `4px solid #F97316`,
+                color: `white`,
+                background: 'rgba(25, 25, 25, 0.8)',
+                backdropFilter: 'blur(5px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+              },
+            })}
+            className={`ml-2 p-2 border rounded-full flex items-center justify-center text-xs hidden md:block ${darkMode ? 'border-gray-600 text-gray-200 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
+            style={{ minWidth: 32, minHeight: 32, color: darkMode ? '#fff' : '#232323', borderColor: darkMode ? '#444' : '#ccc' }}
+            title="Change Language"
           >
-            <span className="w-4 h-4 flex items-center justify-center">
-              {darkMode
-                ? <Sun className="w-4 h-4 transition-all duration-200 active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text" />
-                : <Moon className="w-4 h-4 transition-all duration-200 active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text" />
-              }
-            </span>
+            <Globe className="w-4 h-4" />
+          </button>
+          {/* Mobile Hamburger Button */}
+          <button
+            className="md:hidden ml-2 p-2 rounded-full border flex items-center justify-center"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Open Menu"
+            style={{ background: isOpen ? 'rgba(0,0,0,0.1)' : undefined }}
+          >
+            {isOpen ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={darkMode ? '#fff' : '#232323'} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={darkMode ? '#fff' : '#232323'} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+            )}
           </button>
         </div>
-        {/* Translate Button */}
-        <button
-          onClick={() => toast.info('Sorry..! Translator will update soon...', {
-            duration: 500,
-            style: {
-              borderLeft: `4px solid #F97316`,
-              color: `white`,
-              background: 'rgba(25, 25, 25, 0.8)',
-              backdropFilter: 'blur(5px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-            },
-          })}
-          className={`ml-2 p-2 border rounded-full flex items-center justify-center text-xs hidden md:block ${darkMode ? 'border-gray-600 text-gray-200 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-          style={{ minWidth: 32, minHeight: 32, color: darkMode ? '#fff' : '#232323', borderColor: darkMode ? '#444' : '#ccc' }}
-          title="Change Language"
-        >
-          <Globe className="w-4 h-4" />
-        </button>
-        {/* Mobile Hamburger Button */}
-        <button
-          className="md:hidden ml-2 p-2 rounded-full border flex items-center justify-center"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Open Menu"
-          style={{ background: isOpen ? 'rgba(0,0,0,0.1)' : undefined }}
-        >
-          {isOpen ? (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={darkMode ? '#fff' : '#232323'} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-          ) : (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={darkMode ? '#fff' : '#232323'} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
-          )}
-        </button>
       </div>
       {/* Mobile Dropdown Menu */}
       {isOpen && (

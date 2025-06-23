@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
+import { Center } from '@react-three/drei';
 
 interface ChatBotProps {
   darkMode: boolean;
@@ -73,7 +74,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ darkMode, onOpenContactForm }) => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className={`fixed bottom-6 right-6 z-50 w-80 max-w-xs h-[400px] border-2 border-orange-500 rounded-xl flex flex-col overflow-hidden animate-fade-in ${
+        <div className={`fixed bottom-24 right-6 z-50 w-80 max-w-xs h-[400px] border-2 border-orange-500 rounded-xl flex flex-col overflow-hidden animate-fade-in ${
           darkMode ? 'bg-gray-900' : 'bg-white'
         }`} style={{ width: 320, height: 400, boxShadow: '0 0 32px 6px #fb923cbb' }}>
           {/* Header */}
