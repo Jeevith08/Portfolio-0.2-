@@ -80,7 +80,7 @@ function RobotModel({ targetRotation, floating = false }: { targetRotation?: Rea
   }
 
   return (
-    <Center position={[0, 2, 0]}>
+    <Center position={[0, 1.0, 0]}>
       <primitive
         object={gltf.scene}
         ref={meshRef}
@@ -160,7 +160,7 @@ export default function RobotScreen({ onNavigate, robotState, setRobotState, dar
 
   const handlePointerOut = () => {
     if (isMobile) return;
-    targetRotation.current.x = 0;
+    targetRotation.current.x = 0; 
     targetRotation.current.y = 0;
   };
 
@@ -256,10 +256,10 @@ export default function RobotScreen({ onNavigate, robotState, setRobotState, dar
         </div>
         {/* Layout container */}
         <div className="w-full h-full flex flex-col md:flex-row">
-          {/* Robot canvas takes full screen on mobile, half on desktop */}
+          {/* Robot canvas takes 65% height on mobile, half on desktop */}
           <div
             id="robot-canvas-area"
-            className="relative w-full h-full md:w-1/2"
+            className="relative w-full h-[65%] md:h-full md:w-1/2"
             onPointerMove={!isMobile ? handlePointerMove : undefined}
             onPointerOut={!isMobile ? handlePointerOut : undefined}
           >
@@ -274,7 +274,7 @@ export default function RobotScreen({ onNavigate, robotState, setRobotState, dar
             </Canvas>
           </div>
           {/* UI elements container */}
-          <div className="absolute inset-0 md:relative md:w-1/2 md:h-full flex flex-col items-center justify-end md:justify-center text-center p-4">
+          <div className="relative flex flex-col items-center justify-start w-full h-[35%] p-4 text-center md:h-full md:w-1/2 md:justify-center">
             <div className="relative">
               {/* Animated question/greeting */}
               {currentStep === 'greeting' && (
