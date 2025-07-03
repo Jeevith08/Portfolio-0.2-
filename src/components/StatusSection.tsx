@@ -28,7 +28,7 @@ interface StatusSectionProps {
 }
 
 // Reusable Story Modal Component
-const StoryModal = ({ onClose, images, darkMode }) => {
+const StoryModal = ({ onClose, images, darkMode, onHideA2 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
   useEffect(() => {
@@ -68,12 +68,23 @@ const StoryModal = ({ onClose, images, darkMode }) => {
           <div className="flex">
             {images.map((imgSrc, index) => (
               <div key={index} className="flex-shrink-0 w-full flex items-center justify-center p-4" style={{ flexBasis: '100%' }}>
-                <div className="animated-gradient-border">
+                <div className="animated-gradient-border relative">
                   <img
                     src={`${import.meta.env.BASE_URL}${imgSrc}`}
                     alt={`Story content ${index + 1}`}
                     className="max-h-[80vh] w-auto block rounded-2xl"
                   />
+                  {imgSrc === 'certificate/A2.png' && (
+                    <button
+                      className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-red-500 transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (onHideA2) onHideA2();
+                      }}
+                    >
+                      <X size={20} />
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -105,11 +116,13 @@ const StoryModal = ({ onClose, images, darkMode }) => {
 
 const StatusSection: React.FC<StatusSectionProps> = ({ darkMode }) => {
   const [modalImages, setModalImages] = useState<string[] | null>(null);
+  const [hiddenCertificates, setHiddenCertificates] = useState<string[]>([]);
   
   const beCseImages = ['SNS1.jpg', 'SNS2.jpeg'];
   const eventImages = ['Events/E1.jpeg', 'Events/E2.jpeg', 'Events/E3.jpeg', 'Events/E4.jpeg', 'Events/E5.jpeg', 'Events/E6.jpeg', 'Events/E7.jpeg', 'Events/E8.jpeg'];
   const arpImages = ['ARP.jpeg'];
   const certificateImages = [
+    'certificate/A2.png',
     'certificate/A1.jpg', 'certificate/c1.jpg', 'certificate/c2.jpg', 'certificate/c3.jpg', 'certificate/c4.png', 'certificate/c5.png',
     'certificate/c6.jpg', 'certificate/c7.jpg', 'certificate/c7.png', 'certificate/c8.png', 'certificate/c9.png', 
     'certificate/c10.png', 'certificate/c11.png'
@@ -120,7 +133,7 @@ const StatusSection: React.FC<StatusSectionProps> = ({ darkMode }) => {
     { title: 'B.E (CSE)', image: `${import.meta.env.BASE_URL}SNS1.jpg`, avatar: `${import.meta.env.BASE_URL}SNS2.jpeg`, action: () => setModalImages(beCseImages) },
     { title: 'Events', image: `${import.meta.env.BASE_URL}Events/E1.jpeg`, avatar: `${import.meta.env.BASE_URL}Events/E2.jpeg`, action: () => setModalImages(eventImages) },
     { title: 'ARP', image: `${import.meta.env.BASE_URL}ARP.jpeg`, avatar: `${import.meta.env.BASE_URL}certificate/c4.png`, action: () => setModalImages(arpImages) },
-    { title: 'Certificates', image: `${import.meta.env.BASE_URL}certificate/c5.png`, avatar: `${import.meta.env.BASE_URL}certificate/c6.jpg`, action: () => setModalImages(certificateImages) },
+    { title: 'Certificates', image: `${import.meta.env.BASE_URL}certificate/c5.png`, avatar: `${import.meta.env.BASE_URL}certificate/c6.jpg`, action: () => setModalImages(certificateImages.filter(img => !hiddenCertificates.includes(img))) },
   ];
 
   return (
@@ -174,6 +187,10 @@ const StatusSection: React.FC<StatusSectionProps> = ({ darkMode }) => {
           onClose={() => setModalImages(null)} 
           images={modalImages} 
           darkMode={darkMode}
+          onHideA2={() => {
+            setHiddenCertificates(prev => [...prev, 'certificate/A2.png']);
+            setModalImages((prev) => prev ? prev.filter(img => img !== 'certificate/A2.png') : prev);
+          }}
         />
       )}
       <style>{`

@@ -82,7 +82,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
               Contact
               <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </button>
-            <a href={`${import.meta.env.BASE_URL}JEEVITH resume.pdf.pdf`} download className={`px-3 py-2 border-2 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 text-xs ${darkMode ? 'border-white text-white hover:bg-white hover:text-black' : 'border-black text-black hover:bg-black hover:text-white'}`}> <Download className="w-4 h-4" /> CV </a>
+            <a href={`${import.meta.env.BASE_URL}JEEVI resume.pdf.pdf`} download className={`px-3 py-2 border-2 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 text-xs ${darkMode ? 'border-white text-white hover:bg-white hover:text-black' : 'border-black text-black hover:bg-black hover:text-white'}`}> <Download className="w-4 h-4" /> CV </a>
           </div>
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-xs md:max-w-md mx-auto md:mx-0">
