@@ -74,17 +74,6 @@ const StoryModal = ({ onClose, images, darkMode, onHideA2 }) => {
                     alt={`Story content ${index + 1}`}
                     className="max-h-[80vh] w-auto block rounded-2xl"
                   />
-                  {imgSrc === 'certificate/A2.png' && (
-                    <button
-                      className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-red-500 transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (onHideA2) onHideA2();
-                      }}
-                    >
-                      <X size={20} />
-                    </button>
-                  )}
                 </div>
               </div>
             ))}

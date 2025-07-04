@@ -245,6 +245,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
                 >
                   <span><span className="font-extrabold">FALCONX</span> : <span className="font-extrabold">Web Development</span></span>
                   <span><span className="font-extrabold">CODTECH</span> : <span className="font-extrabold">Android Development</span></span>
+                  <span><span className="font-extrabold">SPOTLIGHT</span> : <span className="font-extrabold">Java</span></span>
                 </div>
               )}
               {/* Blinker keyframes */}
