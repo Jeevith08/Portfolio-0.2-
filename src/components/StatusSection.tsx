@@ -111,7 +111,8 @@ const StatusSection: React.FC<StatusSectionProps> = ({ darkMode }) => {
   const eventImages = ['Events/E1.jpeg', 'Events/E2.jpeg', 'Events/E3.jpeg', 'Events/E4.jpeg', 'Events/E5.jpeg', 'Events/E6.jpeg', 'Events/E7.jpeg', 'Events/E8.jpeg'];
   const arpImages = ['ARP.jpeg'];
   const certificateImages = [
-    'certificate/A1.jpg', 'certificate/A2.jpg','certificate/c1.jpg', 'certificate/c2.jpg', 'certificate/c3.jpg', 'certificate/c4.png', 'certificate/c5.png',
+    'certificate/A2.jpg',
+    'certificate/A1.jpg', 'certificate/c1.jpg', 'certificate/c2.jpg', 'certificate/c3.jpg', 'certificate/c4.png', 'certificate/c5.png',
     'certificate/c6.jpg', 'certificate/c7.jpg', 'certificate/c7.png', 'certificate/c8.png', 'certificate/c9.png', 
     'certificate/c10.png', 'certificate/c11.png'
   ];
