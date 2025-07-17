@@ -65,16 +65,6 @@ const Navbar: React.FC<NavbarProps> = ({
       <div className="relative flex items-center justify-between px-4 py-2 md:px-6">
         {/* Logo/Name Left */}
         <div className="flex items-center">
-          {/* Back Button */}
-          {typeof onBackToRobot === 'function' && (
-            <button
-              onClick={onBackToRobot}
-              aria-label="Back to Robot"
-              className="w-6 h-6 flex items-center justify-center rounded-full border-2 border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/30 shadow hover:shadow-orange-400 transition-all duration-300 mr-2"
-            >
-              <ArrowLeft className="w-3 h-3" />
-            </button>
-          )}
           <div className="text-2xl font-bold pointer-events-auto">
             <span className={darkMode ? 'text-gray-200 font-great-vibes tracking-widest' : 'text-gray-700 font-great-vibes tracking-widest'}>Jeevi</span>
             <span className="font-great-vibes tracking-widest" style={{ color: '#FFA552' }}>.</span>

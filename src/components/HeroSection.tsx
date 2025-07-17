@@ -47,19 +47,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
           <h1 className="text-4xl md:text-6xl mb-2 font-great-vibes" style={{ color: '#fb923c' }}>
             Jeevith
           </h1>
-          {/* Back Button below and near Jeevith name, left-aligned */}
-          {onBackToRobot && (
-            <div className="flex items-center mb-4">
-              <button
-                onClick={onBackToRobot}
-                aria-label="Back to Robot"
-                className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/30 shadow hover:shadow-orange-400 transition-all duration-300"
-                style={{ marginLeft: 0 }}
-              >
-                <ArrowLeft className="w-4 h-4" />
-              </button>
-            </div>
-          )}
           <div className="h-10 md:h-12 mb-4 md:mb-8">
             <h2 className={`text-xl md:text-3xl font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}> 
               {typedText}
@@ -91,7 +78,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
               <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Exp</div>
             </div>
             <div className="text-center">
-              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>2+</div>
+              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>3+</div>
               <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects</div>
             </div>
             <div className="text-center">
@@ -103,15 +90,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
         {/* Right: Profile Photo */}
         <div className="flex-1 flex justify-center order-1 md:order-2 mt-8 md:mt-0 md:justify-end">
           <div className="relative">
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden bg-gradient-to-br from-red-500 to-orange-400 p-1 sparkle-container">
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden sparkle-container" style={{ background: 'conic-gradient(from 0deg,rgb(166, 5, 5),rgb(166, 5, 5),rgb(166, 5, 5) 100%)', padding: '8px' }}>
               <div className={`w-full h-full rounded-full ${darkMode ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center`}>
-                <div className="w-full h-full rounded-full border-4 border-orange-400 shadow-[0_0_24px_8px_#fb923c99] flex items-center justify-center transition-all duration-300 animate-blink-border">
+                <div className="w-full h-full rounded-full flex items-center justify-center transition-all duration-300 animate-blink-border" style={{ boxShadow: '0 0 24px 8px #fb923c99' }}>
                   <img
-                    src={`${import.meta.env.BASE_URL}pic p.png`}
+                    src={`${import.meta.env.BASE_URL}profile pic.jpg`}
                     alt="Profile"
                     className="w-full h-full object-cover rounded-full select-none animate-pop-float animate-float-shake"
                     draggable="false"
-                    style={{ objectPosition: 'center 5%' }}
+                    style={{ objectPosition: 'center 100%' }}
                   />
                 </div>
               </div>

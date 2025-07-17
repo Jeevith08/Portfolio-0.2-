@@ -18,7 +18,7 @@ const proficiencies = [
 ];
 
 const tools = [
-  'HTML', 'CSS', 'Figma', 'MS Word', 'Excel', 'Java', 'Python', 'MySQL'
+  'HTML', 'CSS', 'Figma', 'MS Word', 'Excel', 'Java', 'Python', 'MySQL', 'N8n', 'Streamlit'
 ];
 
 const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
@@ -244,7 +244,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
                   onClick={e => e.stopPropagation()}
                 >
                   <span><span className="font-extrabold">FALCONX</span> : <span className="font-extrabold">Web Development</span></span>
-                  <span><span className="font-extrabold">CODTECH</span> : <span className="font-extrabold">Android Development</span></span>
+
                   <span><span className="font-extrabold">SPOTLIGHT</span> : <span className="font-extrabold">Java</span></span>
                 </div>
               )}

@@ -22,6 +22,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
         <a href="mailto:jeevithofficial08@gmail.com" className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center text-white hover:bg-gray-700 transition-colors duration-300">
           <Mail className="w-5 h-5" />
         </a>
+        <p>Automations powered by <a href="https://n8n.io" target="_blank" rel="noopener">n8n</a></p>
       </div>
     </footer>
   );

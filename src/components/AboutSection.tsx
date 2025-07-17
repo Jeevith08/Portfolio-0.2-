@@ -11,14 +11,14 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
       id="about"
       className={`scroll-mt-20 md:scroll-mt-40 min-h-screen w-full flex items-center justify-center px-4 md:px-0 bg-transparent`}
     >
-      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 lg:ml-16">
         {/* Left: Circular Profile Image */}
-        <div className="flex flex-col items-center lg:items-start justify-center flex-shrink-0 w-full lg:w-auto">
+        <div className="flex flex-col items-center lg:items-end justify-center flex-shrink-0 w-full lg:w-auto">
           <div className="relative">
             {/* Orange gradient border, glow, pop animation */}
             <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 p-2 shadow-[0_0_40px_#ff9800aa] flex items-center justify-center animate-pop-float relative">
               <div className={`w-full h-full rounded-full ${darkMode ? 'bg-[#181818]' : 'bg-white'} flex items-center justify-center overflow-hidden`}>
-                <img src={`${import.meta.env.BASE_URL}pic 1.png`} alt="Jeevith" className="w-full h-full object-cover" style={{ objectPosition: 'center 0%' }} />
+                <img src={`${import.meta.env.BASE_URL}about pic.jpg`} alt="Jeevith" className="w-full h-full object-cover" style={{ objectPosition: 'center 50%' }} />
               </div>
               {/* Sparkle effects outside the circle */}
               <span className="absolute -left-4 md:-left-6 top-4 md:top-6 animate-sparkle1 animate-blink text-sm md:text-base">✨</span>

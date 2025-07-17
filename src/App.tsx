@@ -3,13 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, useMemo, useEffect } from "react";
-import RobotScreen from "./components/RobotScreen";
 import Index from "./pages/Index";
 import Skills from "./pages/Skills";
 import Projects from "./pages/Projects";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactForm from "./components/ContactForm";
 import ChatBot from "./components/ChatBot";
+import PageLoader from "./components/PageLoader";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +21,7 @@ interface RobotState {
 }
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const [currentSection, setCurrentSection] = useState<string | null>(null);
   const [robotState, setRobotState] = useState<RobotState>({
     currentStep: 'greeting',
@@ -44,6 +45,11 @@ const App = () => {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  // Show loading page on first mount
+  useEffect(() => {
+    setLoading(true);
+  }, []);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
@@ -77,46 +83,46 @@ const App = () => {
       case 'contact':
         return <Index onBackToRobot={handleBackToRobot} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
       default:
-        return <RobotScreen onNavigate={handleNavigate} robotState={robotState} setRobotState={setRobotState} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
+        return <Index onBackToRobot={handleBackToRobot} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
     }
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="overflow-x-hidden">
-        <BrowserRouter basename="/Portfolio-0.2-/">
-        {/* Global Sparkle Background */}
-        <div className="sparkle-bg" aria-hidden="true">
-          {sparkles.map(sparkle => (
-            <span
-              key={sparkle.key}
-              className="sparkle-dot"
-              style={{
-                top: `${sparkle.top}%`,
-                left: `${sparkle.left}%`,
-                width: `${sparkle.size}px`,
-                height: `${sparkle.size}px`,
-                animationDelay: `${sparkle.delay}s`,
-              }}
-            />
-          ))}
+    loading ? (
+      <PageLoader onComplete={() => setLoading(false)} />
+    ) : (
+      <QueryClientProvider client={queryClient}>
+        <div className="overflow-x-hidden">
+          <BrowserRouter basename="/Portfolio-0.2-/">
+          {/* Global Sparkle Background */}
+          <div className="sparkle-bg" aria-hidden="true">
+            {sparkles.map(sparkle => (
+              <span
+                key={sparkle.key}
+                className="sparkle-dot"
+                style={{
+                  top: `${sparkle.top}%`,
+                  left: `${sparkle.left}%`,
+                  width: `${sparkle.size}px`,
+                  height: `${sparkle.size}px`,
+                  animationDelay: `${sparkle.delay}s`,
+                }}
+              />
+            ))}
+          </div>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner position="top-right" toastOptions={{ style: { marginTop: '1.5rem' } }}/>
+              <Routes>
+                <Route path="/*" element={renderSection()} />
+              </Routes>
+            <ChatBot darkMode={darkMode} onOpenContactForm={() => setShowContactForm(true)} />
+            {showContactForm && <ContactForm darkMode={darkMode} onClose={() => setShowContactForm(false)} />}
+          </TooltipProvider>
+          </BrowserRouter>
         </div>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner position="top-right" toastOptions={{ style: { marginTop: '1.5rem' } }}/>
-            <Routes>
-              <Route path="/*" element={renderSection()} />
-            </Routes>
-          {currentSection && (
-            <>
-              <ChatBot darkMode={darkMode} onOpenContactForm={() => setShowContactForm(true)} />
-              {showContactForm && <ContactForm darkMode={darkMode} onClose={() => setShowContactForm(false)} />}
-            </>
-          )}
-        </TooltipProvider>
-        </BrowserRouter>
-      </div>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    )
   );
 };
 
