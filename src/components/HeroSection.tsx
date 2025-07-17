@@ -90,7 +90,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
         {/* Right: Profile Photo */}
         <div className="flex-1 flex justify-center order-1 md:order-2 mt-8 md:mt-0 md:justify-end">
           <div className="relative">
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden sparkle-container" style={{ background: 'conic-gradient(from 0deg,rgb(166, 5, 5),rgb(166, 5, 5),rgb(166, 5, 5) 100%)', padding: '8px' }}>
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden sparkle-container" style={{ background: 'conic-gradient(from 0deg,rgb(228, 56, 56),rgb(228, 56, 56),rgb(228, 56, 56) 100%)', padding: '8px' }}>
               <div className={`w-full h-full rounded-full ${darkMode ? 'bg-gray-800' : 'bg-white'} flex items-center justify-center`}>
                 <div className="w-full h-full rounded-full flex items-center justify-center transition-all duration-300 animate-blink-border" style={{ boxShadow: '0 0 24px 8px #fb923c99' }}>
                   <img
