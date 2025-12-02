@@ -7,7 +7,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) => {
-  const titles = ["App Developer", "Java"];
+  const titles = ["Software Developer", "Python"];
   const [typedText, setTypedText] = useState('');
   const [titleIndex, setTitleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
