@@ -94,8 +94,8 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
           </div>
         </div>
 
-        <div className="max-w-6xl w-full mx-auto relative z-10">
-          <div className="text-center mb-16">
+        <div className="w-full relative z-10">
+          <div className="max-w-6xl mx-auto text-center mb-16 px-6">
             <div className="flex items-center justify-center gap-2 mb-3">
               <Briefcase className="w-5 h-5 text-white animate-bounce" />
               <h2 className="text-xs font-black tracking-widest uppercase text-white/80">
@@ -107,37 +107,29 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 p-2">
-            {projects.map((project, index) => {
-              const cardColors = [
-                'bg-[#FF5A1F]', // Orange
-                'bg-[#8233C5]', // Purple
-                'bg-[#00A896]', // Emerald
-                'bg-[#0096C7]', // Blue
-                'bg-[#E0115F]', // Ruby Red
-                'bg-[#F2A600]', // Amber Yellow
-                'bg-[#0077B6]', // Deep Blue
-              ];
-              const rotationClass = [
-                '-rotate-3',
-                'rotate-3',
-                '-rotate-2',
-                'rotate-2',
-                '-rotate-4',
-                'rotate-4',
-                '-rotate-1',
-              ][index % 7];
+          <div className="w-full overflow-hidden py-4">
+            <div className="flex gap-10 hover:[animation-play-state:paused] animate-marquee whitespace-nowrap">
+              {[...projects, ...projects, ...projects].map((project, index) => {
+                const cardColors = [
+                  'bg-[#FF5A1F]', // Orange
+                  'bg-[#8233C5]', // Purple
+                  'bg-[#00A896]', // Emerald
+                  'bg-[#0096C7]', // Blue
+                  'bg-[#E0115F]', // Ruby Red
+                  'bg-[#F2A600]', // Amber Yellow
+                  'bg-[#0077B6]', // Deep Blue
+                ];
+                const rotationClass = index % 2 === 0 ? '-rotate-1' : 'rotate-1';
+                const cardColor = cardColors[index % cardColors.length];
 
-              const cardColor = cardColors[index % cardColors.length];
-
-              return (
-                <ScrollReveal key={project.id} direction="up">
+                return (
                   <div
-                    className={`group relative ${cardColor} border-[12px] border-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out hover:rotate-0 hover:scale-105 hover:z-20 ${rotationClass} p-6 flex flex-col justify-between min-h-[420px]`}
+                    key={`${project.id}-${index}`}
+                    className={`flex-shrink-0 w-80 group relative ${cardColor} border-[8px] border-white rounded-[2rem] shadow-[0_15px_35px_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:rotate-0 hover:scale-105 hover:z-20 ${rotationClass} p-5 flex flex-col justify-between min-h-[380px] whitespace-normal`}
                   >
                     <div>
                       {/* Image Frame */}
-                      <div className="w-full h-44 md:h-48 overflow-hidden rounded-2xl border-4 border-white mb-6 bg-white flex items-center justify-center">
+                      <div className="w-full h-40 overflow-hidden rounded-xl border-2 border-white mb-4 bg-white flex items-center justify-center">
                         <img
                           src={project.image}
                           alt={project.title}
@@ -145,21 +137,21 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                         />
                       </div>
                       
-                      <h3 className="text-xl font-black uppercase tracking-tight text-white mb-2">
+                      <h3 className="text-lg font-black uppercase tracking-tight text-white mb-1">
                         {project.title}
                       </h3>
-                      <p className="text-white/90 text-xs font-semibold leading-relaxed mb-6">
+                      <p className="text-white/95 text-[11px] font-semibold leading-relaxed mb-4">
                         {project.description}
                       </p>
                     </div>
 
                     <div>
                       {/* Tech Badges */}
-                      <div className="flex flex-wrap gap-2 mb-6">
+                      <div className="flex flex-wrap gap-1.5 mb-4">
                         {project.tech.map((tech) => (
                           <span
                             key={tech}
-                            className="bg-white/20 text-white border border-white/35 text-[9px] uppercase font-black py-1 px-3 rounded-full tracking-wider"
+                            className="bg-white/20 text-white border border-white/30 text-[8px] uppercase font-black py-0.5 px-2 rounded-full tracking-wider"
                           >
                             {tech}
                           </span>
@@ -168,24 +160,24 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
 
                       {/* GitHub Button */}
                       <div className="flex justify-between items-center">
-                        <span className="text-[10px] font-black uppercase text-white/75 tracking-wider">
+                        <span className="text-[9px] font-black uppercase text-white/70 tracking-wider">
                           {project.category}
                         </span>
                         <a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 bg-white hover:bg-zinc-100 text-black rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110"
+                          className="w-8 h-8 bg-white hover:bg-zinc-100 text-black rounded-full flex items-center justify-center shadow-md transition-transform duration-300 hover:scale-110"
                           title="View on GitHub"
                         >
-                          <Github className="w-5 h-5" />
+                          <Github className="w-4 h-4" />
                         </a>
                       </div>
                     </div>
                   </div>
-                </ScrollReveal>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
