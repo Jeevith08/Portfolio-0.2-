@@ -95,7 +95,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
             <img 
               src={`${import.meta.env.BASE_URL}ChatGPT Image Jun 6, 2026, 06_35_07 PM.png`} 
               alt="Developer Standing" 
-              className="h-64 md:h-80 object-contain animate-float-gentle mix-blend-multiply"
+              className="h-80 md:h-[400px] lg:h-[440px] object-contain animate-scale-fade-in mix-blend-multiply transition-transform duration-500 hover:scale-[1.1]"
             />
           </ScrollReveal>
         </div>
