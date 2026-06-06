@@ -323,3 +323,75 @@ body {
   animation: float-gentle 4s ease-in-out -2s infinite;
 }
 
+/* Skills Section Custom Animations Specification */
+@keyframes revealText {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+    clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+.animate-reveal-text {
+  animation: revealText 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) forwards;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-card-entrance {
+  animation: cardEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+@keyframes modalBackdrop {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+}
+.animate-modal-backdrop {
+  animation: modalBackdrop 0.3s ease-out forwards;
+}
+
+@keyframes modalEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-modal-entrance {
+  animation: modalEntrance 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+.btn-play-style {
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
