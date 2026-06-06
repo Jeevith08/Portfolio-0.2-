@@ -94,37 +94,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 {item.name}
               </button>
             ))}
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className={`p-2 rounded-full transition-colors flex items-center justify-center ${darkMode ? 'bg-[#a63a13] hover:bg-[#ff4500] text-white' : 'bg-[#ff4500] hover:bg-[#a63a13] text-white'}`}
-            >
-              <span className="w-4 h-4 flex items-center justify-center">
-                {darkMode
-                  ? <Sun className="w-4 h-4 transition-all duration-200 active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text" />
-                  : <Moon className="w-4 h-4 transition-all duration-200 active:bg-gradient-to-r active:from-red-500 active:to-orange-400 active:text-transparent active:bg-clip-text focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400 focus:text-transparent focus:bg-clip-text" />
-                }
-              </span>
-            </button>
           </div>
-          {/* Translate Button */}
-          <button
-            onClick={() => toast.info('Sorry..! Translator will update soon...', {
-              duration: 500,
-              style: {
-                borderLeft: `4px solid #F97316`,
-                color: `white`,
-                background: 'rgba(25, 25, 25, 0.8)',
-                backdropFilter: 'blur(5px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-              },
-            })}
-            className={`ml-2 p-2 border rounded-full flex items-center justify-center text-xs hidden md:block ${darkMode ? 'border-gray-600 text-gray-200 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-            style={{ minWidth: 32, minHeight: 32, color: darkMode ? '#fff' : '#232323', borderColor: darkMode ? '#444' : '#ccc' }}
-            title="Change Language"
-          >
-            <Globe className="w-4 h-4" />
-          </button>
           {/* Mobile Hamburger Button */}
           <button
             className="md:hidden ml-2 p-2 rounded-full border flex items-center justify-center"
@@ -150,9 +120,6 @@ const Navbar: React.FC<NavbarProps> = ({
             {/* Top Row: Logo, Dark Mode, Close */}
             <div className="flex items-center justify-between mb-4">
               <span className={`flex items-center gap-1 font-bold text-lg text-white`}><span className="text-xl">♥</span> Jeevi</span>
-              <button onClick={toggleDarkMode} className="rounded-full p-2">
-                {darkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-300" />}
-              </button>
               <button onClick={() => setIsOpen(false)} className={`rounded-full p-2 shadow ${darkMode ? 'bg-gray-700' : 'bg-white/80'}`}>
                 <X className={`w-5 h-5 ${darkMode ? 'text-gray-300' : 'text-gray-500'}`} />
               </button>

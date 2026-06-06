@@ -81,7 +81,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
       <section
         id="projects"
         className={`relative py-24 px-6 min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-300 ${
-          darkMode ? 'bg-gradient-to-b from-[#180A0E] via-[#33111A] to-[#180A0E]' : 'bg-[#B45060]'
+          darkMode ? 'bg-gradient-to-b from-[#14080B] via-[#2A0E15] to-[#14080B]' : 'bg-[#A34251]'
         }`}
       >
         {/* Background Giant Marquee */}

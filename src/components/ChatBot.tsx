@@ -53,43 +53,34 @@ const ChatBot: React.FC<ChatBotProps> = ({ darkMode, onOpenContactForm }) => {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-gradient-to-r from-[#FF4500] to-[#fb923c] text-white shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center animate-chatbot-glow ${
+        className={`fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-gradient-to-r from-orange-500 to-[#E5B53B] border border-[#E5B53B]/50 text-white shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center animate-chatbot-glow ${
           isOpen ? 'hidden' : 'flex'
         }`}
-        style={{ boxShadow: '0 0 0 0 #FF450055, 0 1.5px 0 #fff8 inset' }}
+        style={{ boxShadow: '0 0 0 0 #FFA55233, 0 1.5px 0 rgba(255, 255, 255, 0.1) inset' }}
       >
         {/* Custom Robot SVG Icon (Orange) */}
         <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="bot" width="30" height="30"/>
         <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
       </button>
 
-      {/* Get in Touch Button near ChatBot */}
-      <button
-        onClick={onOpenContactForm}
-        className="fixed bottom-6 right-20 z-50 px-3 py-1.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-orange-500 to-black shadow-xl border-2 border-orange-500 flex items-center justify-center hover:scale-105 transition-all duration-300"
-        aria-label="Get in Touch"
-      >
-        Get in Touch
-      </button>
-
       {/* Chat Window */}
       {isOpen && (
-        <div className={`fixed bottom-24 right-6 z-50 w-80 max-w-xs h-[400px] border-2 border-orange-500 rounded-xl flex flex-col overflow-hidden animate-fade-in ${
-          darkMode ? 'bg-gray-900' : 'bg-white'
-        }`} style={{ width: 320, height: 400, boxShadow: '0 0 32px 6px #fb923cbb' }}>
+        <div className={`fixed bottom-24 right-6 z-50 w-80 max-w-xs h-[400px] border-2 border-[#E5B53B]/70 rounded-xl flex flex-col overflow-hidden animate-fade-in ${
+          darkMode ? 'bg-[#0D2218]/95 backdrop-blur-md' : 'bg-white'
+        }`} style={{ width: 320, height: 400, boxShadow: '0 0 32px 6px rgba(229, 181, 59, 0.25)' }}>
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#FF4500] to-[#fb923c] p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-[#0D2218] to-[#132E22] border-b border-[#E5B53B]/20 p-4 flex items-center justify-between">
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center mr-3 shadow-inner">
+              <div className="w-8 h-8 rounded-full bg-[#E5B53B]/20 border border-[#E5B53B]/30 flex items-center justify-center mr-3 shadow-inner">
                 {/* Custom Robot SVG Avatar (Orange) */}
                 <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="bot" width="26" height="26"/>
               </div>
               <div>
-                <h3 className="text-white font-semibold">AI Assistant</h3>
-                <p className="text-white/80 text-xs">Online now</p>
+                <h3 className="text-white font-semibold text-sm">AI Assistant</h3>
+                <p className="text-green-400 text-[10px] font-bold">Online now</p>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">
+            <button onClick={() => setIsOpen(false)} className="text-zinc-400 hover:text-[#E5B53B] transition-colors">
               <X size={20} />
             </button>
           </div>
@@ -99,10 +90,10 @@ const ChatBot: React.FC<ChatBotProps> = ({ darkMode, onOpenContactForm }) => {
             <div className="flex flex-col gap-3">
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`max-w-[80%] p-2 rounded-lg ${
+                  <div className={`max-w-[80%] p-2 rounded-lg text-xs leading-relaxed font-semibold ${
                     msg.isBot
-                      ? 'bg-orange-100 dark:bg-gray-700 text-black dark:text-white'
-                      : 'bg-orange-500 text-white'
+                      ? 'bg-[#132E22]/60 border border-[#E5B53B]/20 text-zinc-100'
+                      : 'bg-gradient-to-r from-orange-500 to-[#E5B53B] text-white shadow-md'
                   }`}>
                     {msg.text}
                   </div>
@@ -112,18 +103,18 @@ const ChatBot: React.FC<ChatBotProps> = ({ darkMode, onOpenContactForm }) => {
           </div>
 
           {/* Input */}
-          <div className="p-2 border-t border-orange-200 dark:border-gray-700 flex items-center">
+          <div className="p-2 border-t border-[#E5B53B]/10 bg-[#0D2218] flex items-center">
             <input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
               placeholder="Type your message..."
-              className="flex-1 h-9 px-3 py-1 rounded-full text-sm border focus:outline-none focus:ring-2 text-black dark:text-white bg-white dark:bg-gray-800 transition-all duration-200 border-orange-400 focus:ring-orange-400"
+              className="flex-1 h-9 px-3 py-1 rounded-full text-xs border focus:outline-none focus:ring-2 text-zinc-100 bg-[#132E22]/60 transition-all duration-200 border-[#E5B53B]/40 focus:ring-[#E5B53B]"
             />
             <button
               onClick={handleSendMessage}
-              className="ml-2 w-9 h-9 flex-shrink-0 rounded-full bg-gradient-to-r from-orange-500 to-black text-white flex items-center justify-center"
+              className="ml-2 w-9 h-9 flex-shrink-0 rounded-full bg-gradient-to-r from-orange-500 to-[#E5B53B] text-white flex items-center justify-center hover:scale-105 transition-all duration-300"
             >
               <Send size={18} />
             </button>

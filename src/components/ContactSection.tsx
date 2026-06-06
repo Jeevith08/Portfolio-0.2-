@@ -20,7 +20,7 @@ const CONTACT_ICONS = [
     key: 'linkedin',
   },
   {
-    href: 'https://www.instagram.com/',
+    href: 'https://www.instagram.com/jeevith_008?utm_source=qr',
     className: 'w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white hover:bg-pink-600 transition-colors duration-300',
     icon: <Instagram className="w-5 h-5" />,
     key: 'instagram',
@@ -49,12 +49,14 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
   return (
     <section
       id="contact"
-      className="relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden bg-[#F2C12E]"
+      className={`relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden transition-colors duration-300 ${
+        darkMode ? 'bg-[#C2941E]' : 'bg-[#E2B324]'
+      }`}
     >
       {/* Background Giant Marquee */}
       <div className="absolute inset-0 flex flex-col justify-center gap-8 opacity-10 select-none pointer-events-none uppercase font-black text-6xl md:text-8xl tracking-widest text-black">
         <div className="animate-marquee whitespace-nowrap">
-          JEEVITH PALANI • FLUTTER DEVELOPER • FULL-STACK DEVELOPER • DATA ANALYST • &nbsp; JEEVITH PALANI • FLUTTER DEVELOPER • FULL-STACK DEVELOPER • DATA ANALYST • &nbsp;
+          JEEVITH PALANI • FLUTTER DEVELOPER • PYTHON DEVELOPER • DATA ANALYST • &nbsp; JEEVITH PALANI • FLUTTER DEVELOPER • PYTHON DEVELOPER • DATA ANALYST • &nbsp;
         </div>
         <div className="animate-marquee whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
           FOLLOW ON INSTAGRAM • GET IN TOUCH • LET'S COLLABORATE • &nbsp; FOLLOW ON INSTAGRAM • GET IN TOUCH • LET'S COLLABORATE • &nbsp;
