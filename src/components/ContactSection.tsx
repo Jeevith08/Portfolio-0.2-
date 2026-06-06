@@ -89,17 +89,14 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
       </div>
 
       <div className="w-full max-w-xl mx-auto relative z-10 flex flex-col items-center justify-center px-6 pt-12">
-        {/* Working Developer Photo */}
+        {/* Cartoon Standing Developer */}
         <div className="w-full flex justify-center mb-8">
           <ScrollReveal direction="up">
-            <div className="relative group overflow-hidden rounded-3xl w-64 h-64 md:w-80 md:h-80 border-4 border-black/90 shadow-2xl shadow-black/20 hover:shadow-black/40 transition-all duration-500">
-              <img 
-                src={`${import.meta.env.BASE_URL}developer_working.jpg`} 
-                alt="Developer Working" 
-                className="w-full h-full object-cover transition-all duration-700 filter sepia brightness-90 contrast-110 group-hover:filter-none group-hover:scale-110 group-hover:rotate-1"
-              />
-              <div className="absolute inset-0 bg-yellow-500/10 group-hover:bg-transparent transition-all duration-500 pointer-events-none" />
-            </div>
+            <img 
+              src={`${import.meta.env.BASE_URL}ChatGPT Image Jun 6, 2026, 06_35_07 PM.png`} 
+              alt="Developer Standing" 
+              className="h-64 md:h-80 object-contain animate-float-gentle mix-blend-multiply"
+            />
           </ScrollReveal>
         </div>
 
