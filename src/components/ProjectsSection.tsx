@@ -13,32 +13,67 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
   const projects = [
     {
       id: 1,
-      title: "Personal Portfolio",
-      description: `A clean, beginner-friendly portfolio showcasing my projects, skills, certifications, and achievements as an engineering student.`,
-      image: `${import.meta.env.BASE_URL}p1.png`,
-      tech: ["HTML", "CSS", "JS"],
-      category: "Web Application",
-      github: "https://github.com/Jeevith08/jeevith_portfolio"
+      title: "DTrade App",
+      description: `A cross-platform trading mobile application featuring real-time market data integration, secure user authentication, stock portfolio tracking, and transaction modules.`,
+      image: `${import.meta.env.BASE_URL}dtrade_app_mockup.png`,
+      tech: ["Flutter", "Dart", "REST API", "Supabase"],
+      category: "Mobile Application",
+      github: "https://github.com/jeevith08"
     },
     {
       id: 2,
       title: "Portfolio Craft",
-      description: `A no-code platform to design personalized, stunning portfolios with real-time templates.Perfect for students, freelancers, and professionals to showcase their work.`,
+      description: `An AI-powered portfolio creation platform featuring a drag-and-drop layout editor, responsive templates, real-time preview, and code export functionality.`,
       image: `${import.meta.env.BASE_URL}p2.png`,
-      tech: ["HTML", "CSS", "OpenAI", "JS"],
-      category: "AI Portfolio craft",
+      tech: ["React", "JavaScript", "AI APIs"],
+      category: "Web Application",
       github: "https://github.com/Jeevith08/Porfolio-Craft"
     },
     {
       id: 3,
-      title: "Personal Portfolio 0.2 ",
-      description: `An interactive, AI-powered portfolio where a robot avatar welcomes you and guides you through out full web..`,
+      title: "ZenBox",
+      description: `An AI-driven email classification tool automating categorization of emails into Important, Internships, Spam, and Updates segments.`,
+      image: `${import.meta.env.BASE_URL}zenbox_email_mockup.png`,
+      tech: ["React", "Tailwind CSS", "Python", "API Integration"],
+      category: "Web Application",
+      github: "https://github.com/jeevith08"
+    },
+    {
+      id: 4,
+      title: "SEO Insight Hub",
+      description: `An AI-driven SEO optimization platform that analyzes website HTML, detects issues, and automatically generates optimized meta tags and structure changes.`,
+      image: `${import.meta.env.BASE_URL}seo_insight_mockup.png`,
+      tech: ["Python", "AI APIs", "HTML/CSS"],
+      category: "Web Application",
+      github: "https://github.com/jeevith08"
+    },
+    {
+      id: 5,
+      title: "Personal Portfolio 2.0",
+      description: `An interactive, AI-optimized personal portfolio featuring a 3D robot avatar assistant, custom micro-animations, and dynamic language/theme controls.`,
       image: `${import.meta.env.BASE_URL}p3.png`,
-      tech: ["React 18","Vite","Tailwind CSS","shadcn/ui","Three.js","React Router","GSAP"],
+      tech: ["React 18", "Vite", "Tailwind CSS", "shadcn/ui", "Three.js", "GSAP"],
       category: "Portfolio 0.2",
       github: "https://github.com/Jeevith08/Portfolio-0.2-"
     },
-    
+    {
+      id: 6,
+      title: "Tap Game",
+      description: `An interactive tap-based mobile game utilizing StatefulWidgets and state management for efficient UI rendering and smooth real-time scoring.`,
+      image: `${import.meta.env.BASE_URL}tap_game_mockup.png`,
+      tech: ["Flutter", "Dart"],
+      category: "Mobile Application",
+      github: "https://github.com/jeevith08"
+    },
+    {
+      id: 7,
+      title: "Calculator App",
+      description: `A responsive mobile calculator with clean layout design, dynamic input handling, full arithmetic operations, and efficient StatefulWidget rendering.`,
+      image: `${import.meta.env.BASE_URL}calculator_app_mockup.png`,
+      tech: ["Flutter", "Dart"],
+      category: "Mobile Application",
+      github: "https://github.com/jeevith08"
+    }
   ];
 
   const handlePrev = () => {
@@ -76,7 +111,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                   }`} 
                   style={{
                       height: 280,
-                    background: '#000',
+                    background: darkMode ? '#121212' : '#ffffff',
                     transform: `translate(-50%, 0) ${
                       offset === -1
                           ? 'scale(0.95) translateX(-60%) translateY(20px)'
@@ -90,12 +125,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                   }}
                 >
                   <ScrollReveal direction="up">
-                    <div className={`group rounded-2xl overflow-hidden transition-all duration-500 bg-black shadow-xl border ${darkMode ? 'border-orange-100/20' : 'border-orange-100/10'}`}>
-                      <div className="relative overflow-hidden rounded-t-2xl">
+                    <div className={`group rounded-2xl overflow-hidden transition-all duration-500 shadow-xl border ${darkMode ? 'bg-[#121212] border-orange-100/20' : 'bg-white border-orange-100/10'}`}>
+                      <div className={`relative overflow-hidden rounded-t-2xl h-28 flex items-center justify-center ${darkMode ? 'bg-gray-950' : 'bg-orange-50/50'}`}>
                         <img 
                           src={project.image} 
                           alt={project.title}
-                          className="w-full h-28 object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-orange-900/70 via-orange-200/10' : 'from-orange-100/60 via-orange-50/10'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                         <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

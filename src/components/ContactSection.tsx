@@ -7,7 +7,7 @@ interface ContactSectionProps {
 }
 
 const CONTACT_DETAILS = [
-  { label: 'Email', value: 'jeevithofficial08@gmail.com' },
+  { label: 'Email', value: 'jeevith1708@gmail.com' },
   { label: 'Phone', value: '+91 9384736809' },
   { label: 'Location', value: 'Coimbatore' },
 ];
@@ -20,7 +20,7 @@ const CONTACT_ICONS = [
     key: 'github',
   },
   {
-    href: 'https://www.linkedin.com/in/jeevith-p--/',
+    href: 'https://www.linkedin.com/in/jeevithpalani',
     className: 'w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300',
     icon: <Linkedin className="w-5 h-5" />,
     key: 'linkedin',
@@ -44,7 +44,7 @@ const CONTACT_ICONS = [
     key: 'leetcode',
   },
   {
-    href: 'mailto:jeevithofficial08@gmail.com',
+    href: 'mailto:jeevith1708@gmail.com',
     className: 'w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white hover:bg-emerald-600 transition-colors duration-300',
     icon: <Mail className="w-5 h-5" />,
     key: 'mail',

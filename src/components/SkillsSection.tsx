@@ -11,15 +11,14 @@ interface SkillsSectionProps {
 }
 
 const proficiencies = [
-  { name: 'Python', value: 40 },
-  { name: 'Web Dev', value: 50 },
-  { name: 'Java', value: 70 },
-  { name: 'Logical', value: 80 },
+  { name: 'Flutter', value: 85 },
+  { name: 'React.js', value: 75 },
+  { name: 'Python', value: 80 },
+  { name: 'Power BI', value: 80 },
 ];
 
 const tools = [
-  'HTML', 'CSS', 'Figma', 'MS Word', 'Excel', 'Java', 'Python', 'MySQL', 'N8n', 'Streamlit'
-];
+  'Python', 'Dart', 'Flutter', 'Supabase', 'GitHub', 'Git', 'Excel', 'REST API', 'SQL'];
 
 const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
   // SVG line chart points
@@ -112,7 +111,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
                 ))}
                 {/* Vertical grid lines */}
                 {proficiencies.map((_, i) => (
-                  
+
                   <line
                     key={i}
                     dur="5s"
@@ -126,7 +125,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
                 ))}
                 {/* Line */}
                 <polyline
-                
+
                   id="skill-graph-line"
                   dur="10s"
                   fill="none"
@@ -151,10 +150,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
                 </circle>
                 <defs>
                   <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
                     <feMerge>
-                      <feMergeNode in="coloredBlur"/>
-                      <feMergeNode in="SourceGraphic"/>
+                      <feMergeNode in="coloredBlur" />
+                      <feMergeNode in="SourceGraphic" />
                     </feMerge>
                   </filter>
                 </defs>
@@ -230,22 +229,30 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
               </ScrollReveal>
               {showInternship && (
                 <div
-                  className={`absolute top-full left-0 mt-2 z-30 min-w-[200px] max-w-[260px] rounded-xl shadow-lg border-2 border-orange-500 flex flex-col items-start justify-center
+                  className={`absolute top-full left-0 mt-2 z-30 min-w-[280px] max-w-[320px] rounded-xl shadow-lg border-2 border-orange-500 flex flex-col items-start justify-center gap-1.5
                     ${darkMode ? 'bg-[#181818] text-orange-100 border-orange-500' : 'bg-white text-orange-700 border-orange-500'}
                   `}
                   style={{
                     boxShadow: '0 0 12px 2px #fb923c88',
-                    padding: '7px 14px',
+                    padding: '10px 16px',
                     fontWeight: 600,
-                    fontSize: '0.85rem',
-                    lineHeight: 1.5,
-                    whiteSpace: 'nowrap',
+                    fontSize: '0.8rem',
+                    lineHeight: 1.4,
                   }}
                   onClick={e => e.stopPropagation()}
                 >
-                  <span><span className="font-extrabold">FALCONX</span> : <span className="font-extrabold">Web Development</span></span>
-
-                  <span><span className="font-extrabold">SPOTLIGHT</span> : <span className="font-extrabold">Java</span></span>
+                  <div className="flex flex-col w-full border-b border-orange-500/20 pb-1">
+                    <span className="text-[10px] text-gray-400">Apr 2026 - Present</span>
+                    <span><span className="font-extrabold text-orange-500">DTrade</span>: App Development Intern</span>
+                  </div>
+                  <div className="flex flex-col w-full border-b border-orange-500/20 pb-1">
+                    <span className="text-[10px] text-gray-400">Dec 2025 - Jan 2026</span>
+                    <span><span className="font-extrabold text-orange-500">Microsoft Elevate & AICTE</span>: Power BI Intern</span>
+                  </div>
+                  <div className="flex flex-col w-full">
+                    <span className="text-[10px] text-gray-400">Apr 2026</span>
+                    <span><span className="font-extrabold text-orange-500">ServiceNow University & AICTE</span>: ServiceNow Virtual Intern</span>
+                  </div>
                 </div>
               )}
               {/* Blinker keyframes */}

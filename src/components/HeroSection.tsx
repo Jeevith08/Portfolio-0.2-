@@ -7,12 +7,12 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) => {
-  const titles = ["Software Developer", "Python"];
+  const titles = ["Flutter Developer", "Full-Stack Developer"];
   const [typedText, setTypedText] = useState('');
   const [titleIndex, setTitleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
   useEffect(() => {
     let typingTimeout: NodeJS.Timeout;
     const currentTitle = titles[titleIndex];
@@ -48,12 +48,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
             Jeevith
           </h1>
           <div className="h-10 md:h-12 mb-4 md:mb-8">
-            <h2 className={`text-xl md:text-3xl font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}> 
+            <h2 className={`text-xl md:text-3xl font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               {typedText}
               <span className="animate-pulse text-red-500">|</span>
             </h2>
           </div>
-          <p className={`text-sm md:text-base max-w-2xl mx-auto md:mx-0 leading-relaxed mb-8 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>I'm a passionate developer who creates beautiful, functional, and user-centered digital experiences. I specialize in modern web technologies and love bringing ideas to life.</p>
+          <p className={`text-sm md:text-base max-w-2xl mx-auto md:mx-0 leading-relaxed mb-8 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>I am a passionate Mobile & Full-Stack Developer and Computer Science Engineering student with experience building cross-platform apps and interactive dashboards. I specialize in Flutter, Dart, React, Python, and Data Analytics.</p>
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start mb-8 md:mb-16">
             <button
@@ -74,16 +74,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode, onBackToRobot }) =>
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-xs md:max-w-md mx-auto md:mx-0">
             <div className="text-center">
-              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>2+</div>
-              <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Exp</div>
+              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>200+</div>
+              <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>LeetCode Solved</div>
             </div>
             <div className="text-center">
-              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>3+</div>
+              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>7+</div>
               <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects</div>
             </div>
             <div className="text-center">
-              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>2+</div>
-              <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Intern</div>
+              <div className={`text-base font-bold mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>3+</div>
+              <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Internships</div>
             </div>
           </div>
         </div>

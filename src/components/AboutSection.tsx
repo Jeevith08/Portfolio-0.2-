@@ -40,23 +40,23 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
               </span>
             </div>
             <h2 className={`text-sm md:text-xs font-bold mb-3 font-sans ${darkMode ? 'text-white' : 'text-gray-800'}`}>Turning Ideas Into Reality</h2>
-            <p className={`text-sm md:text-xs mb-5 font-sans leading-relaxed ${darkMode ? 'text-gray-200' : 'text-gray-600'}`}>I'm Jeevith, a passionate App developer and a student with over 2 years of experience in creating digital solutions. I believe in writing clean, efficient code and designing user experiences that make a difference.</p>
+            <p className={`text-sm md:text-xs mb-5 font-sans leading-relaxed ${darkMode ? 'text-gray-200' : 'text-gray-600'}`}>I am Jeevith, a passionate Mobile & Full-Stack Developer and Computer Science Engineering student at SNS College of Engineering. With experience in Flutter, Dart, React, Python, and Power BI, I enjoy building cross-platform mobile apps, AI-driven web platforms, and data dashboards.</p>
             {/* Highlights Grid */}
             <div className="grid grid-cols-3 gap-2 md:gap-3 mb-5">
               <div className={`flex flex-col items-center rounded-2xl shadow p-2 md:p-3 ${darkMode ? 'bg-[#181818]' : 'bg-orange-50'}`}> 
                 <TrendingUp className="w-4 h-4 md:w-5 md:h-5 mb-1 text-orange-500" />
-                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>8.66</span>
+                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>8.31</span>
                 <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>CGPA</span>
               </div>
               <div className={`flex flex-col items-center rounded-2xl shadow p-2 md:p-3 ${darkMode ? 'bg-[#181818]' : 'bg-orange-50'}`}> 
                 <Calendar className="w-4 h-4 md:w-5 md:h-5 mb-1 text-orange-500" />
-                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>3rd</span>
+                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>4th</span>
                 <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Year</span>
               </div>
               <div className={`flex flex-col items-center rounded-2xl shadow p-2 md:p-3 ${darkMode ? 'bg-[#181818]' : 'bg-orange-50'}`}> 
                 <Heart className="w-4 h-4 md:w-5 md:h-5 mb-1 text-orange-500" />
-                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>100%</span>
-                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Dream Big</span>
+                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>200+</span>
+                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>LeetCode</span>
               </div>
             </div>
           </div>

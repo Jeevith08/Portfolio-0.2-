@@ -37,7 +37,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ darkMode, onOpenContactForm }) => {
           document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
         }, 1000);
       } else if (inputText.toLowerCase().includes('contact')) {
-        botResponse += "You can reach Jeevith through the contact form or email at jeevithofficial08@gmail.com";
+        botResponse += "You can reach Jeevith through the contact form or email at jeevith1708@gmail.com";
       } else {
         botResponse += "Feel free to ask about Jeevith's projects, skills, or how to get in touch!";
       }

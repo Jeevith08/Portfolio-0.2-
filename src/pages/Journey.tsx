@@ -8,16 +8,17 @@ interface JourneyProps {
 }
 
 const timeline = [
-  { year: '2021', title: 'SSLC', desc: 'Completed SSLC at Vivekananda Matriculation School', icon: <Star size={20} /> },
-  { year: '2023', title: 'HSLC', desc: 'Completed HSLC at Vivekananda Higher Secondary School', icon: <Book size={20} /> },
-  { year: '2024', title: 'B.E', desc: 'Started Undergraduate degree at SNS College of Engineering ', icon: <GraduationCap size={20} /> },
-  { year: 'Future', title: 'Upgrading', desc: 'Continuously learning and growing in the field of technology', icon: <Rocket size={20} /> },
+  { year: '2023', title: 'Higher Secondary Certificate', desc: 'Completed HSC at Vivekananda Matric Hr. Sec School, Namakkal (81%)', icon: <Book size={20} /> },
+  { year: '2023 - 2027', title: 'B.E. Computer Science Engineering', desc: 'SNS College of Engineering, Coimbatore. Current GPA: 8.31/10.0', icon: <GraduationCap size={20} /> },
+  { year: 'Dec 2025', title: 'Power BI Intern', desc: 'Microsoft Elevate & AICTE. Developed interactive dashboards & performed data visualization.', icon: <Star size={20} /> },
+  { year: 'Apr 2026', title: 'ServiceNow Virtual Intern', desc: 'ServiceNow University & AICTE. Built automated workflows and system-based apps.', icon: <Star size={20} /> },
+  { year: 'Apr 2026 - Present', title: 'App Development Intern', desc: 'DTrade. Developing a real-time trading mobile application using Flutter, Dart, REST API, and Supabase.', icon: <Rocket size={20} /> },
 ];
 
 const achievements = [
-  { title: 'Academic Excellence', desc: 'ARP Nominee', icon: '🎓' },
-  { title: 'Future Goals', desc: 'Aiming to become an APP Developer ', icon: '🎯' },
-  { title: 'Learning Focus', desc: 'Passionate about technology and innovation', icon: '💡' },
+  { title: 'All Rounder Performer', desc: 'ARP 2025 Nominee for excellence in academics, technical projects, and leadership.', icon: '🏆' },
+  { title: 'Competitive Programming', desc: 'Active competitive programmer with 200+ LeetCode problems solved.', icon: '💻' },
+  { title: 'Generative AI Foundations', desc: 'Certified by AWS & Databricks in Generative AI Foundations.', icon: '⚡' },
 ];
 
 const Journey: React.FC<JourneyProps> = ({ darkMode }) => {
