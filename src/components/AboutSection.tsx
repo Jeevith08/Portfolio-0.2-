@@ -9,54 +9,86 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
   return (
     <section
       id="about"
-      className={`scroll-mt-20 md:scroll-mt-40 min-h-screen w-full flex items-center justify-center px-4 md:px-0 bg-transparent`}
+      className={`relative scroll-mt-20 md:scroll-mt-40 min-h-screen w-full flex items-center justify-center px-6 py-20 overflow-hidden transition-colors duration-300 ${
+        darkMode ? 'bg-gradient-to-b from-black via-zinc-950 to-black' : 'bg-gradient-to-b from-white via-orange-50/10 to-white'
+      }`}
     >
-      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 lg:ml-16">
-        {/* Left: Circular Profile Image */}
-        <div className="flex flex-col items-center lg:items-end justify-center flex-shrink-0 w-full lg:w-auto">
+      {/* Background Giant Marquee */}
+      <div className={`absolute top-1/4 left-0 w-full overflow-hidden opacity-5 select-none pointer-events-none tracking-widest ${
+        darkMode ? 'text-white' : 'text-orange-900'
+      }`}>
+        <div className="animate-marquee whitespace-nowrap text-[8vw] font-black uppercase">
+          ABOUT ME • WHO I AM • PASSIONATE CREATOR • DEVELOPER • &nbsp; ABOUT ME • WHO I AM • PASSIONATE CREATOR • DEVELOPER • &nbsp;
+        </div>
+      </div>
+
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 relative z-10">
+        {/* Left: Circular Profile Image with Tilt Floating */}
+        <div className="flex flex-col items-center justify-center flex-shrink-0 w-full lg:w-auto animate-float-gentle">
           <div className="relative">
-            {/* Orange gradient border, glow, pop animation */}
-            <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 p-2 shadow-[0_0_40px_#ff9800aa] flex items-center justify-center animate-pop-float relative">
-              <div className={`w-full h-full rounded-full ${darkMode ? 'bg-[#181818]' : 'bg-white'} flex items-center justify-center overflow-hidden`}>
-                <img src={`${import.meta.env.BASE_URL}about pic.jpg`} alt="Jeevith" className="w-full h-full object-cover" style={{ objectPosition: 'center 50%' }} />
+            {/* Orange gradient border, glow, shadow */}
+            <div className={`w-48 h-48 md:w-64 md:h-64 rounded-3xl bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 p-1.5 shadow-2xl flex items-center justify-center rotate-3 hover:rotate-0 transition-transform duration-500`}>
+              <div className={`w-full h-full rounded-2xl ${darkMode ? 'bg-zinc-900' : 'bg-white'} flex items-center justify-center overflow-hidden`}>
+                <img 
+                  src={`${import.meta.env.BASE_URL}about pic.jpg`} 
+                  alt="Jeevith" 
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                  style={{ objectPosition: 'center 30%' }} 
+                />
               </div>
-              {/* Sparkle effects outside the circle */}
-              <span className="absolute -left-4 md:-left-6 top-4 md:top-6 animate-sparkle1 animate-blink text-sm md:text-base">✨</span>
-              <span className="absolute right-0 -bottom-4 md:-bottom-6 animate-sparkle2 animate-blink text-sm md:text-base">✨</span>
-              <span className="absolute left-1/2 -top-5 md:-top-7 animate-sparkle3 animate-blink text-sm md:text-base">✨</span>
+              {/* Decorative dots */}
+              <span className="absolute -left-3 -top-3 text-xl animate-bounce">✨</span>
+              <span className="absolute -right-3 -bottom-3 text-xl animate-bounce" style={{ animationDelay: '1s' }}>✨</span>
             </div>
           </div>
         </div>
+
         {/* Right: Floating Card with About Content */}
-        <div className="flex-1 flex justify-center w-full lg:w-auto">
-          <div className={`rounded-3xl shadow-2xl p-4 md:p-6 max-w-lg w-full relative text-center lg:text-left ${darkMode ? 'bg-[#232323]' : 'bg-white/90'}`}> 
-            <div className="mb-4 flex items-center justify-center lg:justify-start gap-3">
-              <span className={`inline-block rounded-full p-2 shadow bg-gradient-to-tr from-orange-500 to-red-500 text-white`}>
+        <div className="flex-1 flex justify-center w-full lg:w-auto animate-float-gentle-reverse">
+          <div className={`rounded-3xl shadow-2xl p-6 md:p-8 max-w-xl w-full relative text-left border transition-all duration-300 ${
+            darkMode 
+              ? 'bg-[#121212]/90 border-zinc-800 shadow-orange-950/20' 
+              : 'bg-white/95 border-orange-100 shadow-orange-100/40'
+          }`}> 
+            <div className="mb-6 flex items-center gap-3">
+              <span className="inline-block rounded-2xl p-2.5 bg-gradient-to-tr from-orange-500 to-red-500 text-white shadow-md shadow-orange-500/20">
                 <User className="w-5 h-5 md:w-6 md:h-6" />
               </span>
-              <span className="inline-flex items-center gap-2 font-semibold tracking-wide text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
-                <User className="w-4 h-4 md:w-5 md:h-5" />
+              <h3 className="font-black tracking-widest text-xs uppercase bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                 About Me
-              </span>
+              </h3>
             </div>
-            <h2 className={`text-sm md:text-xs font-bold mb-3 font-sans ${darkMode ? 'text-white' : 'text-gray-800'}`}>Turning Ideas Into Reality</h2>
-            <p className={`text-sm md:text-xs mb-5 font-sans leading-relaxed ${darkMode ? 'text-gray-200' : 'text-gray-600'}`}>I am Jeevith, a passionate Mobile & Full-Stack Developer and Computer Science Engineering student at SNS College of Engineering. With experience in Flutter, Dart, React, Python, and Power BI, I enjoy building cross-platform mobile apps, AI-driven web platforms, and data dashboards.</p>
+            
+            <h2 className={`text-xl md:text-2xl font-black tracking-tight mb-4 uppercase ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+              Turning Ideas Into Reality
+            </h2>
+            
+            <p className={`text-xs md:text-sm mb-6 leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-gray-600'}`}>
+              I am Jeevith, a passionate Mobile & Full-Stack Developer and Computer Science Engineering student at SNS College of Engineering. With experience in Flutter, Dart, React, Python, and Power BI, I enjoy building cross-platform mobile apps, AI-driven web platforms, and data dashboards.
+            </p>
+
             {/* Highlights Grid */}
-            <div className="grid grid-cols-3 gap-2 md:gap-3 mb-5">
-              <div className={`flex flex-col items-center rounded-2xl shadow p-2 md:p-3 ${darkMode ? 'bg-[#181818]' : 'bg-orange-50'}`}> 
-                <TrendingUp className="w-4 h-4 md:w-5 md:h-5 mb-1 text-orange-500" />
-                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>8.31</span>
-                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>CGPA</span>
+            <div className="grid grid-cols-3 gap-3">
+              <div className={`flex flex-col items-center justify-center rounded-2xl p-4 border transition-all duration-300 hover:scale-105 ${
+                darkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-orange-50/50 border-orange-100'
+              }`}> 
+                <TrendingUp className="w-5 h-5 mb-2 text-orange-500" />
+                <span className="font-black text-sm md:text-base text-orange-500 leading-none mb-1">8.31</span>
+                <span className={`text-[9px] font-bold tracking-wider uppercase ${darkMode ? 'text-zinc-500' : 'text-gray-500'}`}>CGPA</span>
               </div>
-              <div className={`flex flex-col items-center rounded-2xl shadow p-2 md:p-3 ${darkMode ? 'bg-[#181818]' : 'bg-orange-50'}`}> 
-                <Calendar className="w-4 h-4 md:w-5 md:h-5 mb-1 text-orange-500" />
-                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>4th</span>
-                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Year</span>
+              <div className={`flex flex-col items-center justify-center rounded-2xl p-4 border transition-all duration-300 hover:scale-105 ${
+                darkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-orange-50/50 border-orange-100'
+              }`}> 
+                <Calendar className="w-5 h-5 mb-2 text-orange-500" />
+                <span className="font-black text-sm md:text-base text-orange-500 leading-none mb-1">4th</span>
+                <span className={`text-[9px] font-bold tracking-wider uppercase ${darkMode ? 'text-zinc-500' : 'text-gray-500'}`}>Year</span>
               </div>
-              <div className={`flex flex-col items-center rounded-2xl shadow p-2 md:p-3 ${darkMode ? 'bg-[#181818]' : 'bg-orange-50'}`}> 
-                <Heart className="w-4 h-4 md:w-5 md:h-5 mb-1 text-orange-500" />
-                <span className={`font-bold text-sm md:text-base bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent`}>200+</span>
-                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>LeetCode</span>
+              <div className={`flex flex-col items-center justify-center rounded-2xl p-4 border transition-all duration-300 hover:scale-105 ${
+                darkMode ? 'bg-zinc-900/50 border-zinc-800' : 'bg-orange-50/50 border-orange-100'
+              }`}> 
+                <Heart className="w-5 h-5 mb-2 text-orange-500" />
+                <span className="font-black text-sm md:text-base text-orange-500 leading-none mb-1">200+</span>
+                <span className={`text-[9px] font-bold tracking-wider uppercase ${darkMode ? 'text-zinc-500' : 'text-gray-500'}`}>LeetCode</span>
               </div>
             </div>
           </div>

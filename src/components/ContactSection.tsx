@@ -73,55 +73,78 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
   return (
     <section
       id="contact"
-      className={`flex flex-col items-center justify-center min-h-screen w-full flex-grow transition-colors duration-300 bg-transparent`}
-      onMouseMove={undefined}
-      onMouseLeave={undefined}
+      className={`relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden transition-colors duration-300 ${
+        darkMode ? 'bg-gradient-to-b from-black via-zinc-950 to-black' : 'bg-gradient-to-b from-white via-orange-50/10 to-white'
+      }`}
     >
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h2 className={`text-base font-bold text-center flex items-center justify-center gap-2 ${darkMode ? 'text-white' : 'text-black'}`}> <Mail className="w-5 h-5" /> Get in <span className="text-orange-500">Touch</span></h2>
-        <p className={`text-lg text-center max-w-xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Let's create something amazing together</p>
-      </div>
-      <div
-        className="mt-16 w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-b from-[#FF4500] to-[#fb923c] border-4 border-orange-500 relative transition-transform duration-1000 animate-blink"
-        style={{ boxShadow: '0 0 32px 6px #fb923cbb' }}
-        aria-label="Call"
-        onClick={() => setShowDetails((v) => !v)}
-      >
-        <ScrollReveal direction="up">
-          <Phone className="w-8 h-8 text-white" />
-        </ScrollReveal>
+      {/* Background Giant Marquee */}
+      <div className={`absolute top-1/4 left-0 w-full overflow-hidden opacity-5 select-none pointer-events-none tracking-widest ${
+        darkMode ? 'text-white' : 'text-orange-900'
+      }`}>
+        <div className="animate-marquee whitespace-nowrap text-[8vw] font-black uppercase">
+          GET IN TOUCH • CONTACT ME • HIRE ME • COLLABORATE • &nbsp; GET IN TOUCH • CONTACT ME • HIRE ME • COLLABORATE • &nbsp;
+        </div>
       </div>
 
-      {showDetails && (
-        <>
-          <div className="mt-8 space-y-2 text-center animate-fade-out">
-            {CONTACT_DETAILS.map((item) => (
-              <div key={item.label} className={`text-base ${darkMode ? 'text-white' : 'text-black'}`}> <span className="font-semibold">{item.label}:</span> {item.value} </div>
-            ))}
+      <div className="max-w-xl w-full mx-auto relative z-10 flex flex-col items-center justify-center px-6">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Mail className="w-5 h-5 text-orange-500" />
+            <h2 className="text-xs font-black tracking-widest uppercase bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+              Contact
+            </h2>
           </div>
-          <ScrollReveal direction="up">
-            <div className="mt-6 flex justify-center space-x-4">
+          <h2 className={`text-xl md:text-2xl font-black tracking-tight uppercase mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            Let's Collaborate
+          </h2>
+        </div>
+
+        <div
+          className="w-24 h-24 rounded-full flex items-center justify-center bg-gradient-to-b from-[#FF4500] to-[#fb923c] border-4 border-orange-500 relative transition-transform duration-300 animate-float-gentle cursor-pointer hover:scale-105"
+          style={{ boxShadow: '0 10px 40px rgba(251, 146, 60, 0.3)' }}
+          aria-label="Call"
+          onClick={() => setShowDetails((v) => !v)}
+        >
+          <Phone className="w-8 h-8 text-white" />
+        </div>
+
+        {showDetails && (
+          <div className="w-full mt-10 space-y-4 animate-scale-in text-center">
+            <div className={`rounded-2xl p-6 border shadow-xl ${
+              darkMode 
+                ? 'bg-zinc-900/90 border-zinc-800 text-zinc-300' 
+                : 'bg-white border-orange-100 text-gray-700'
+            }`}>
+              {CONTACT_DETAILS.map((item) => (
+                <div key={item.label} className="text-xs md:text-sm py-1"> 
+                  <span className="font-black uppercase tracking-wider text-[10px] text-orange-500 mr-2">{item.label}:</span> 
+                  {item.value} 
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex justify-center gap-4">
               {CONTACT_ICONS.map((icon, idx) => (
                 <a
                   key={icon.key}
                   href={icon.href}
                   target={icon.href.startsWith('http') ? '_blank' : undefined}
                   rel={icon.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={icon.className + ` transition-all duration-500 ${visibleIcons > idx ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
-                  style={{ transitionDelay: `${idx * 80}ms` }}
+                  className={icon.className + ` transition-all duration-300 hover:scale-110 hover:-translate-y-1 ${visibleIcons > idx ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
+                  style={{ transitionDelay: `${idx * 80}ms`, boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}
                 >
                   {icon.icon}
                 </a>
               ))}
             </div>
-          </ScrollReveal>
-        </>
-      )}
+          </div>
+        )}
 
-      {/* Copyright Bar */}
-      <div className="mt-24 mb-16 flex justify-center w-full">
-        <div className="px-6 py-2 rounded-full bg-gradient-to-r from-[#FF4500] to-[#fb923c] text-orange-100 text-base font-medium shadow-lg" style={{maxWidth: 380}}>
-          <span className="text-orange-200">© 2025 Jeevith. All rights reserved.</span>
+        {/* Copyright Bar */}
+        <div className="mt-20 mb-8 flex justify-center w-full">
+          <div className="px-6 py-2 rounded-full bg-gradient-to-r from-[#FF4500] to-[#fb923c] text-orange-100 text-xs font-bold tracking-wider uppercase shadow-lg shadow-orange-500/10">
+            <span className="text-orange-100">© 2026 Jeevith. All rights reserved.</span>
+          </div>
         </div>
       </div>
     </section>

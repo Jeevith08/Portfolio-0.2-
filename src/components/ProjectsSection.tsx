@@ -85,12 +85,25 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
 
   return (
     <>
-      <section id="projects" className={`py-14 px-4 -mt-12 mb-0 bg-transparent`}>
-        <div className="max-w-2xl mx-auto relative min-h-[400px] flex flex-col items-center justify-center">
+      <section
+        id="projects"
+        className={`relative py-20 px-6 min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-300 ${
+          darkMode ? 'bg-gradient-to-b from-black via-zinc-950 to-black' : 'bg-gradient-to-b from-white via-orange-50/10 to-white'
+        }`}
+      >
+        {/* Background Giant Marquee */}
+        <div className={`absolute top-1/4 left-0 w-full overflow-hidden opacity-5 select-none pointer-events-none tracking-widest ${
+          darkMode ? 'text-white' : 'text-orange-900'
+        }`}>
+          <div className="animate-marquee whitespace-nowrap text-[8vw] font-black uppercase">
+            MY WORK • FEATURED PROJECTS • MOBILE APPS • WEB PORTFOLIOS • &nbsp; MY WORK • FEATURED PROJECTS • MOBILE APPS • WEB PORTFOLIOS • &nbsp;
+          </div>
+        </div>
+
+        <div className="max-w-2xl w-full mx-auto relative z-10 min-h-[420px] flex flex-col items-center justify-center">
           <div className="text-center mb-12">
-            <h3 className="text-base font-semibold text-center mb-2 tracking-widest text-orange-500 flex items-center justify-center gap-2"><Briefcase className="w-5 h-5" /> My Work</h3>
-            <h2 className={`text-base font-extrabold text-center mb-6 flex items-center justify-center gap-2 ${darkMode ? 'text-white' : 'text-black'}`}><Star className="w-5 h-5" /> Featured Projects</h2>
-            <p className={`text-sm max-w-lg mx-auto ${darkMode ? 'text-orange-200/80' : 'text-orange-700/80'}`}>Here are some of my recent projects that showcase my skills and passion for creating amazing digital experiences.</p>
+            <h3 className="text-xs font-black tracking-widest uppercase bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent flex items-center justify-center gap-2"><Briefcase className="w-5 h-5" /> My Work</h3>
+            <h2 className={`text-xl md:text-2xl font-black tracking-tight uppercase text-center mb-6 flex items-center justify-center gap-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}><Star className="w-5 h-5" /> Featured Projects</h2>
           </div>
           <div className="relative w-full h-[280px] flex items-center justify-center">
             {projects.map((project, index) => {

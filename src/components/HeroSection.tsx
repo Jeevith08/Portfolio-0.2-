@@ -64,13 +64,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
         </span>
 
         {/* Big Bold Headline */}
-        <h1 className={`text-5xl md:text-7xl font-black tracking-tight mb-2 uppercase leading-none transition-colors duration-300 ${
-          darkMode ? 'text-white' : 'text-gray-950'
-        }`}>
-          JEEVITH
-        </h1>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
-          PALANI
+        <h1 className="text-5xl md:text-7xl mb-4 font-great-vibes" style={{ color: '#fb923c' }}>
+          Jeevith
         </h1>
 
         {/* Dynamic Typewriter Role */}

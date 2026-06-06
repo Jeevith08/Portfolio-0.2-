@@ -297,3 +297,29 @@ body {
     transform: scale(1);
   }
 }
+
+/* Marquee and Tilt float animations matching Instagram reference style */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.animate-float-gentle-reverse {
+  animation: float-gentle 4s ease-in-out -2s infinite;
+}
+
