@@ -1,43 +1,83 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Wrench, Brain, Settings, Briefcase, X } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { Wrench, Briefcase, X } from 'lucide-react';
 
 interface SkillsSectionProps {
   darkMode: boolean;
 }
 
-const proficiencies = [
-  { name: 'Flutter', value: 85 },
-  { name: 'React.js', value: 75 },
-  { name: 'Python', value: 80 },
-  { name: 'Power BI', value: 80 },
-];
-
-const tools = [
-  'Python', 'Dart', 'Flutter', 'Supabase', 'GitHub', 'Git', 'Excel', 'REST API', 'SQL'
+const skills = [
+  {
+    name: 'Flutter',
+    subtitle: 'Mobile Development',
+    accentColor: 'hover:border-[#02569B]/40 hover:shadow-[0_20px_40px_rgba(2,86,155,0.18)] dark:hover:bg-[#02569b]/5',
+    logo: (
+      <svg viewBox="0 0 24 24" className="w-12 h-12 text-[#02569B] fill-current">
+        <path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.37zM6 15.7L2.3 19.4l3.692 3.692 3.692-3.692L6 15.7zM14.33 7.82l-4.63 4.63 4.63 4.63h7.37l-4.63-4.63 4.63-4.63h-7.37z"/>
+      </svg>
+    )
+  },
+  {
+    name: 'Supabase',
+    subtitle: 'Backend & Database',
+    accentColor: 'hover:border-[#3ECF8E]/40 hover:shadow-[0_20px_40px_rgba(62,207,142,0.18)] dark:hover:bg-[#3ecf8e]/5',
+    logo: (
+      <svg viewBox="0 0 24 24" className="w-11 h-11 text-[#3ECF8E] fill-current">
+        <path d="M21.362 10.108L13.123.633a1.09 1.09 0 00-1.892.775v6.52H3.77a1.09 1.09 0 00-.819 1.808l8.239 9.475a1.09 1.09 0 001.892-.775V11.92h7.462a1.09 1.09 0 00.819-1.808z"/>
+      </svg>
+    )
+  },
+  {
+    name: 'React',
+    subtitle: 'Frontend Development',
+    accentColor: 'hover:border-[#61DAFB]/40 hover:shadow-[0_20px_40px_rgba(97,218,251,0.18)] dark:hover:bg-[#61dafb]/5',
+    logo: (
+      <svg viewBox="-11.5 -10.23174 23 20.46348" className="w-12 h-12 text-[#61DAFB] fill-none stroke-current stroke-[1.5]">
+        <ellipse rx="11" ry="4.2"/>
+        <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+        <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+        <circle r="2" fill="currentColor"/>
+      </svg>
+    )
+  },
+  {
+    name: 'UI/UX Design',
+    subtitle: 'Figma, Lovable.dev',
+    accentColor: 'hover:border-[#F24E1E]/40 hover:shadow-[0_20px_40px_rgba(242,78,30,0.18)] dark:hover:bg-[#f24e1e]/5',
+    logo: (
+      <svg viewBox="0 0 24 24" className="w-10 h-10 text-[#F24E1E] fill-current">
+        <path d="M12 0C8.685 0 6 2.685 6 6c0 1.95 1 3.682 2.505 4.685C6.985 11.685 6 13.432 6 15.385 6 18.7 8.685 21.385 12 21.385c3.315 0 6-2.685 6-5.385v-10c0-3.315-2.685-6-6-6zm-3.5 6c0-1.925 1.575-3.5 3.5-3.5s3.5 1.575 3.5 3.5-1.575 3.5-3.5 3.5-3.5-1.575-3.5-3.5zm0 9.385c0-1.925 1.575-3.5 3.5-3.5s3.5 1.575 3.5 3.5-1.575 3.5-3.5 3.5-3.5-1.575-3.5-3.5zM12 10.7V7.185c1.925 0 3.5 1.575 3.5 3.5S13.925 10.7 12 10.7z"/>
+      </svg>
+    )
+  },
+  {
+    name: 'Git & DevOps',
+    subtitle: 'Netlify, GitHub',
+    accentColor: 'hover:border-[#F05032]/40 hover:shadow-[0_20px_40px_rgba(240,80,50,0.18)] dark:hover:bg-[#f05032]/5',
+    logo: (
+      <svg viewBox="0 0 24 24" className="w-12 h-12 text-[#F05032] fill-current">
+        <path d="M20.25 11.25l-7.5-7.5a1.058 1.058 0 00-1.5 0l-7.5 7.5a1.058 1.058 0 000 1.5l7.5 7.5a1.058 1.058 0 001.5 0l7.5-7.5a1.058 1.058 0 000-1.5zM9 13.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm6 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm-3-3a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/>
+      </svg>
+    )
+  },
+  {
+    name: 'Full Stack',
+    subtitle: 'End-to-end Development',
+    accentColor: 'hover:border-[#10B981]/40 hover:shadow-[0_20px_40px_rgba(16,185,129,0.18)] dark:hover:bg-[#10b981]/5',
+    logo: (
+      <svg viewBox="0 0 24 24" className="w-12 h-12 text-[#10B981] fill-none stroke-current stroke-[2]">
+        <path d="M16 18l6-6-6-6M8 6l-6 6 6 6M12 4l-3 16"/>
+      </svg>
+    )
+  }
 ];
 
 const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
-  // SVG line chart points
-  const chartWidth = 320;
-  const chartHeight = 120;
-  const maxVal = 100;
-  const step = chartWidth / (proficiencies.length - 1);
-  const points = proficiencies.map((p, i) => `${i * step},${chartHeight - (p.value / maxVal) * chartHeight}`).join(' ');
-
-  // Axis lines and grid
-  const gridLines = [0, 20, 40, 60, 80, 100];
-
   const [showInternship, setShowInternship] = useState(false);
   const [revealSection, setRevealSection] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [sectionTop, setSectionTop] = useState(0);
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const proficiencyChartRef = useRef<HTMLDivElement>(null);
 
   // Intersection Observer for viewport triggers (80% / 20% visibility)
   useEffect(() => {
@@ -65,34 +105,6 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // GSAP animation for SVG line dots
-  useEffect(() => {
-    if (!revealSection) return;
-    const chart = proficiencyChartRef.current;
-    if (!chart) return;
-
-    const dots = chart.querySelectorAll('.dot');
-    gsap.set(dots, { transformOrigin: 'center center', scale: 0, opacity: 0 });
-
-    const tl = gsap.timeline();
-
-    tl.to(dots, {
-      duration: 0.5,
-      scale: 1,
-      opacity: 1,
-      stagger: 0.2,
-      ease: 'power1.inOut',
-      attr: { filter: 'url(#glow)' },
-    }).to(dots, {
-      duration: 0.5,
-      attr: { filter: 'none' },
-    });
-
-    return () => {
-      tl.kill();
-    };
-  }, [revealSection]);
-
   // Parallax calculations
   const parallaxY = (scrollY - sectionTop) * 0.15;
   const opacityDelta = Math.max(0, 0.08 - Math.abs(scrollY - sectionTop) / 2000);
@@ -101,7 +113,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
     <section
       id="skills"
       ref={sectionRef}
-      className={`relative min-h-screen py-20 px-6 flex items-center justify-center overflow-hidden transition-all duration-1000 ${
+      className={`relative min-h-screen py-24 px-6 flex items-center justify-center overflow-hidden transition-all duration-1000 ${
         darkMode
           ? 'bg-gradient-to-b from-black via-zinc-950 to-black'
           : 'bg-gradient-to-r from-[#F5F1E8] via-[#FAFAF8] to-[#F5F1E8] animate-gradient-shift'
@@ -131,158 +143,52 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ darkMode }) => {
               My Skills
             </h2>
           </div>
-          <h2 className={`text-xl md:text-2xl font-black tracking-tight uppercase ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-xl md:text-3xl font-black tracking-tight uppercase ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             Technologies & Tools
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 items-stretch">
-          {/* Card 1: Proficiency Line Chart - Entrance & Hover Animation */}
-          <div
-            ref={proficiencyChartRef}
-            className={`rounded-[2.5rem] p-8 shadow-2xl border flex flex-col justify-between transition-all duration-500 ease-out md:hover:translate-y-[-8px] md:hover:shadow-[0_20px_50px_rgba(251,146,60,0.25)] active:scale-[1.02] ${
-              revealSection ? 'animate-card-entrance' : 'opacity-0 scale-85 translate-y-[20px]'
-            } ${
-              darkMode
-                ? 'bg-[#121212]/90 hover:bg-[#1a1a1a]/95 border-zinc-800'
-                : 'bg-white hover:bg-amber-50/20 border-orange-100'
-            }`}
+        {/* Polished Interactive Skills Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {skills.map((skill, index) => (
+            <div
+              key={skill.name}
+              className={`group rounded-3xl p-8 border flex flex-col items-center justify-center text-center transition-all duration-500 ease-out md:hover:translate-y-[-8px] active:scale-[1.02] ${
+                revealSection ? 'animate-card-entrance' : 'opacity-0 scale-85 translate-y-[20px]'
+              } ${skill.accentColor} ${
+                darkMode
+                  ? 'bg-[#141414]/70 backdrop-blur-md border-zinc-800/80 text-white'
+                  : 'bg-white border-zinc-200/80 shadow-md text-gray-900'
+              }`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {/* Logo Box */}
+              <div className="mb-6 w-20 h-20 rounded-2xl bg-zinc-100/50 dark:bg-zinc-900/60 flex items-center justify-center border border-zinc-200/40 dark:border-zinc-800/40 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                {skill.logo}
+              </div>
+
+              {/* Title & Subtitle */}
+              <h3 className="text-lg font-black uppercase tracking-tight mb-1">
+                {skill.name}
+              </h3>
+              <p className="text-[11px] text-gray-400 dark:text-zinc-500 font-bold uppercase tracking-wider">
+                {skill.subtitle}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Play Button Styled Internships Button */}
+        <div className="w-full flex justify-center mt-4">
+          <button
+            type="button"
+            onClick={() => setShowInternship(true)}
+            className="opacity-85 scale-100 bg-black/40 border-2 border-orange-500 text-orange-400 px-6 py-2.5 rounded-full font-black text-xs uppercase tracking-widest btn-play-style hover:scale-115 hover:opacity-100 hover:shadow-[0_0_20px_rgba(251,146,60,0.6)] hover:bg-black/50 active:scale-122 active:opacity-95 flex items-center gap-2"
+            aria-label="View Internships"
           >
-            <div>
-              <div className="flex items-center gap-2 mb-6">
-                <Settings className="w-5 h-5 text-orange-500" />
-                <h3 className={`text-sm font-black uppercase tracking-wider ${darkMode ? 'text-white' : 'text-gray-950'}`}>Proficiency</h3>
-              </div>
-              <svg width={chartWidth} height={chartHeight} className="w-full max-w-xs mx-auto block overflow-visible">
-                {/* Grid lines */}
-                {gridLines.map((y) => (
-                  <line
-                    key={y}
-                    x1={0}
-                    x2={chartWidth}
-                    y1={chartHeight - (y / maxVal) * chartHeight}
-                    y2={chartHeight - (y / maxVal) * chartHeight}
-                    stroke={darkMode ? '#FF980033' : '#FF980022'}
-                    strokeWidth={1}
-                  />
-                ))}
-                {/* Vertical grid lines */}
-                {proficiencies.map((_, i) => (
-                  <line
-                    key={i}
-                    x1={i * step}
-                    x2={i * step}
-                    y1={0}
-                    y2={chartHeight}
-                    stroke={darkMode ? '#FF980033' : '#FF980022'}
-                    strokeWidth={1}
-                  />
-                ))}
-                {/* Line */}
-                <polyline
-                  id="skill-graph-line"
-                  fill="none"
-                  stroke="#FF4500"
-                  strokeWidth="4"
-                  points={points}
-                  className="drop-shadow-[0_2px_12px_#FF450088]"
-                  style={{ strokeDasharray: 400, strokeDashoffset: 400, animation: 'dash 2s ease-out forwards' }}
-                />
-                {/* Running light effect */}
-                <circle r="7" fill="orange" filter="url(#glow)">
-                  <animateMotion
-                    dur="5s"
-                    repeatCount="indefinite"
-                    keyPoints="0;1"
-                    keyTimes="0;1"
-                    calcMode="linear"
-                    begin="1.5s"
-                  >
-                    <mpath xlinkHref="#skill-graph-line" />
-                  </animateMotion>
-                </circle>
-                <defs>
-                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-                {/* Dots */}
-                {proficiencies.map((p, i) => (
-                  <circle
-                    key={p.name}
-                    cx={i * step}
-                    cy={chartHeight - (p.value / maxVal) * chartHeight}
-                    r="7"
-                    fill="#FF9800"
-                    stroke="#FF4500"
-                    strokeWidth="3"
-                    className="dot hover:scale-125 transition-transform duration-200 cursor-pointer"
-                  />
-                ))}
-              </svg>
-
-              <div className="flex justify-between mt-4 text-xs font-bold text-gray-500 dark:text-zinc-400">
-                {proficiencies.map((p) => (
-                  <span key={p.name}>{p.name}</span>
-                ))}
-              </div>
-              <div className="flex justify-between mt-1 text-xs text-orange-500 font-black">
-                {proficiencies.map((p) => (
-                  <span key={p.name}>{p.value}%</span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Languages & Tools Card - Entrance & Hover Animation */}
-          <div
-            className={`rounded-[2.5rem] p-8 shadow-2xl border flex flex-col justify-between transition-all duration-500 ease-out md:hover:translate-y-[-8px] md:hover:shadow-[0_20px_50px_rgba(251,146,60,0.25)] active:scale-[1.02] ${
-              revealSection ? 'animate-card-entrance' : 'opacity-0 scale-85 translate-y-[20px]'
-            } ${
-              darkMode
-                ? 'bg-[#121212]/90 hover:bg-[#1a1a1a]/95 border-zinc-800'
-                : 'bg-white hover:bg-amber-50/20 border-orange-100'
-            }`}
-            style={{ animationDelay: '0.3s' }}
-          >
-            <div>
-              <div className="flex items-center gap-2 mb-6">
-                <Brain className="w-5 h-5 text-orange-500" />
-                <h3 className={`text-sm font-black uppercase tracking-wider ${darkMode ? 'text-white' : 'text-gray-950'}`}>Languages & Tools</h3>
-              </div>
-              <div className="flex flex-wrap gap-2 items-center">
-                {tools.map((tool) => (
-                  <span
-                    key={tool}
-                    className={`px-4 py-2 rounded-full font-bold text-xs shadow transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 ${
-                      darkMode
-                        ? 'bg-zinc-900 text-orange-200 hover:bg-zinc-800 border border-zinc-800'
-                        : 'bg-orange-50 text-orange-700 hover:bg-orange-100/70 border border-orange-100/50'
-                    }`}
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Play Button Styled Internships Button */}
-            <div className="w-full mt-8 flex justify-center md:justify-start">
-              <button
-                type="button"
-                onClick={() => setShowInternship(true)}
-                className="opacity-85 scale-100 bg-black/40 border-2 border-orange-500 text-orange-400 px-6 py-2.5 rounded-full font-black text-xs uppercase tracking-widest btn-play-style hover:scale-115 hover:opacity-100 hover:shadow-[0_0_20px_rgba(251,146,60,0.6)] hover:bg-black/50 active:scale-122 active:opacity-95 flex items-center gap-2"
-                aria-label="View Internships"
-              >
-                <Briefcase className="w-4 h-4 animate-pulse" />
-                Internships
-              </button>
-            </div>
-          </div>
+            <Briefcase className="w-4 h-4 animate-pulse" />
+            Internships
+          </button>
         </div>
       </div>
 
