@@ -115,31 +115,41 @@ const Journey: React.FC<JourneyProps> = ({ darkMode }) => {
       </div>
 
       {/* Timeline Section */}
-      <div className="relative w-full max-w-4xl mx-auto mb-28 z-10">
-        {/* Vertical Line */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-[#E5B53B]/35 transform -translate-x-1/2" />
+      <div className="relative w-full max-w-2xl mx-auto mb-28 z-10 px-4 md:px-8">
+        {/* Left Vertical Line */}
+        <div className="absolute left-6 md:left-10 top-2 bottom-2 w-0.5 bg-[#E5B53B]/30" />
 
-        <div className="space-y-16">
+        <div className="space-y-12 relative">
           {timeline.map((item, idx) => (
-            <ScrollReveal key={idx} direction={idx % 2 === 0 ? 'left' : 'right'}>
-              <div className="relative flex items-center group">
-                {/* Content Card */}
-                <div className={`w-5/12 ${idx % 2 === 0 ? 'pr-12 text-right' : 'pl-12 text-left ml-auto'}`}>
-                  <span className="text-[10px] font-black text-[#E5B53B] uppercase tracking-widest block mb-2">{item.year}</span>
-                  <h3 className={`text-sm md:text-base font-black uppercase ${
-                    darkMode ? 'text-white' : 'text-[#0D2218]'
-                  }`}>{item.title}</h3>
-                  <p className={`text-xs mt-2 leading-relaxed font-medium ${
-                    darkMode ? 'text-zinc-400' : 'text-gray-600'
-                  }`}>{item.desc}</p>
-                </div>
-                
-                {/* Center Circle and Icon */}
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <ScrollReveal key={idx} direction="right">
+              <div className="relative flex items-start group min-h-[90px]">
+                {/* Timeline Icon on the line */}
+                <div className="absolute left-0 md:left-4 top-1.5 z-10">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 border-[#E5B53B] ${
-                    darkMode ? 'bg-[#0D2218] text-[#E5B53B]' : 'bg-white text-[#0D2218]'
-                  } shadow-2xl transition-all duration-300 group-hover:scale-115 group-hover:shadow-[0_0_20px_rgba(229,181,59,0.5)]`}>
+                    darkMode 
+                      ? 'bg-gradient-to-tr from-[#E5B53B] to-yellow-400 text-[#0D2218]' 
+                      : 'bg-gradient-to-tr from-[#E5B53B] to-yellow-400 text-white'
+                  } shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(229,181,59,0.5)]`}>
                     {item.icon}
+                  </div>
+                </div>
+
+                {/* Left Bracket Content Card */}
+                <div className="pl-16 md:pl-24 w-full text-left">
+                  <div className="border-l-[3px] border-[#E5B53B]/60 pl-5 py-1 transition-all duration-300 group-hover:border-[#E5B53B]">
+                    <span className="text-[10px] font-black text-[#E5B53B] uppercase tracking-widest block mb-1">
+                      {item.year}
+                    </span>
+                    <h3 className={`text-sm md:text-base font-black uppercase tracking-tight ${
+                      darkMode ? 'text-white' : 'text-[#0D2218]'
+                    }`}>
+                      {item.title}
+                    </h3>
+                    <p className={`text-xs mt-1 leading-relaxed font-medium ${
+                      darkMode ? 'text-zinc-400' : 'text-gray-600'
+                    }`}>
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -152,17 +162,24 @@ const Journey: React.FC<JourneyProps> = ({ darkMode }) => {
       <div className="w-full max-w-4xl mx-auto mb-28 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-stretch">
           <ScrollReveal direction="left">
-            <div className={`h-full rounded-[2rem] shadow-2xl p-8 border flex flex-col transition-all duration-300 hover:scale-102 ${
+            <div className={`h-full rounded-[2.5rem] shadow-2xl p-8 border flex flex-col transition-all duration-500 hover:scale-[1.02] ${
               darkMode 
-                ? 'bg-[#132E22]/50 border-zinc-800 shadow-[#081510]/50' 
-                : 'bg-white border-zinc-200 shadow-zinc-200/50'
+                ? 'bg-[#132E22]/40 border-zinc-800/80 shadow-[#081510]/50 hover:border-[#E5B53B]/40 hover:shadow-[0_20px_50px_rgba(229,181,59,0.15)]' 
+                : 'bg-white border-zinc-200/80 shadow-zinc-200/50 hover:border-[#E5B53B]/40 hover:shadow-[0_20px_50px_rgba(229,181,59,0.15)]'
             }`}>
               <h4 className="font-black text-xs uppercase tracking-widest mb-6 text-[#E5B53B]">
                 Achievements & Goals
               </h4>
               <ul className="space-y-4 flex-grow">
                 {achievements.map((a, idx) => (
-                  <li key={idx} className="flex items-start gap-4">
+                  <li 
+                    key={idx} 
+                    className={`flex items-start gap-4 p-4 rounded-2xl border transition-all duration-300 ${
+                      darkMode 
+                        ? 'bg-black/20 border-zinc-850 hover:border-[#E5B53B]/30 hover:bg-black/30' 
+                        : 'bg-zinc-50 border-zinc-200 hover:border-[#E5B53B]/30 hover:bg-zinc-100'
+                    }`}
+                  >
                     <span className="text-xl leading-none mt-0.5">{a.icon}</span>
                     <div>
                       <span className={`font-black text-xs uppercase tracking-wider ${
@@ -179,15 +196,18 @@ const Journey: React.FC<JourneyProps> = ({ darkMode }) => {
           </ScrollReveal>
           
           <ScrollReveal direction="right">
-            <div className={`h-full rounded-[2rem] shadow-2xl p-8 border flex flex-col justify-center transition-all duration-300 hover:scale-102 ${
+            <div className={`h-full rounded-[2.5rem] shadow-2xl p-8 border flex flex-col justify-center relative overflow-hidden transition-all duration-500 hover:scale-[1.02] ${
               darkMode 
-                ? 'bg-[#132E22]/50 border-zinc-800 shadow-[#081510]/50' 
-                : 'bg-white border-zinc-200 shadow-zinc-200/50'
+                ? 'bg-[#132E22]/40 border-zinc-800/80 shadow-[#081510]/50 hover:border-[#E5B53B]/40 hover:shadow-[0_20px_50px_rgba(229,181,59,0.15)]' 
+                : 'bg-white border-zinc-200/80 shadow-zinc-200/50 hover:border-[#E5B53B]/40 hover:shadow-[0_20px_50px_rgba(229,181,59,0.15)]'
             }`}>
-              <h4 className="font-black text-xs uppercase tracking-widest mb-6 text-[#E5B53B]">
+              {/* Giant quote mark backdrop */}
+              <span className="absolute -top-2 -left-2 text-9xl text-[#E5B53B]/10 font-serif select-none pointer-events-none">“</span>
+              
+              <h4 className="font-black text-xs uppercase tracking-widest mb-6 text-[#E5B53B] relative z-10">
                 My Vision
               </h4>
-              <blockquote className={`text-sm md:text-base italic leading-relaxed font-medium ${
+              <blockquote className={`text-sm md:text-base italic leading-relaxed font-medium relative z-10 ${
                 darkMode ? 'text-zinc-300' : 'text-gray-700'
               }`}>
                 "Every step in my educational journey is a building block towards becoming a skilled professional. I believe in continuous learning and growth, embracing challenges as opportunities to excel."
