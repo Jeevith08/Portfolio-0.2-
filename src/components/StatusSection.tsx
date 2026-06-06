@@ -125,47 +125,70 @@ const StatusSection: React.FC<StatusSectionProps> = ({ darkMode }) => {
   ];
 
   return (
-    <section id="status" className="py-16 bg-transparent">
-      <div className="max-w-6xl mx-auto px-4">
-        <ScrollReveal>
-          <h2 className={`text-xl font-bold mb-8 text-center md:text-left text-orange-500`}>
-            Current Status
+    <section 
+      id="status" 
+      className={`relative py-20 px-6 overflow-hidden transition-colors duration-300 ${
+        darkMode ? 'bg-gradient-to-b from-black via-zinc-950 to-black' : 'bg-gradient-to-b from-white via-orange-50/10 to-white'
+      }`}
+    >
+      {/* Background Giant Marquee */}
+      <div className={`absolute top-1/4 left-0 w-full overflow-hidden opacity-5 select-none pointer-events-none tracking-widest ${
+        darkMode ? 'text-white' : 'text-orange-900'
+      }`}>
+        <div className="animate-marquee whitespace-nowrap text-[8vw] font-black uppercase">
+          CURRENT STATUS • MY STORIES • LATEST HIGHLIGHTS • EDUCATION &nbsp; CURRENT STATUS • MY STORIES • LATEST HIGHLIGHTS • EDUCATION &nbsp;
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10 px-4">
+        {/* Heading & Tagline */}
+        <div className="text-center md:text-left mb-12">
+          <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
+            <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
+            <h2 className="text-xs font-black tracking-widest uppercase bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+              Current Status
+            </h2>
+          </div>
+          <h2 className={`text-xl md:text-2xl font-black tracking-tight uppercase ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            Latest Highlights
           </h2>
-        </ScrollReveal>
+        </div>
+
         <div className="relative">
-          <div className="flex gap-4 pb-4 overflow-x-auto">
+          <div className="flex gap-6 pb-6 overflow-x-auto snap-x scrollbar-thin">
             {stories.map((story, index) => (
-              <ScrollReveal key={index} direction="up" delay={index * 0.1}>
-                <div 
-                  className="flex-shrink-0 w-32 h-48 rounded-2xl relative group cursor-pointer"
-                  onClick={() => story.action && story.action()}
-                >
-                  <div className="w-full h-full rounded-2xl transition-transform duration-300 group-hover:scale-105 story-animated-border">
-                    <img
-                      src={story.image}
-                      alt={story.title}
-                      className="w-full h-full object-cover rounded-2xl"
-                    />
-                  </div>
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-t from-black/60 to-transparent`} />
-                  
-                  {story.type === 'add' ? (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-blue-500/80 flex items-center justify-center border-2 border-white mb-2">
-                        <Plus className="w-6 h-6 text-white" />
-                      </div>
-                      <p className="text-white font-semibold text-sm">{story.title}</p>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="absolute top-3 left-3 w-8 h-8 rounded-full border-2 border-orange-500 p-0.5 animate-border-pulse">
-                        <img src={story.avatar} alt="avatar" className="w-full h-full object-cover rounded-full" />
-                      </div>
-                      <p className="absolute bottom-3 left-3 text-white font-semibold text-sm">{story.title}</p>
-                    </>
-                  )}
+              <div 
+                key={index}
+                className={`flex-shrink-0 w-36 h-56 rounded-2xl relative group cursor-pointer snap-start transition-all duration-300 hover:-translate-y-2 hover:rotate-1 ${
+                  index % 2 === 0 ? 'animate-float-gentle' : 'animate-float-gentle-reverse'
+                }`}
+                onClick={() => story.action && story.action()}
+              >
+                <div className="w-full h-full rounded-2xl p-0.5 transition-transform duration-300 story-animated-border overflow-hidden">
+                  <img
+                    src={story.image}
+                    alt={story.title}
+                    className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-115"
+                  />
                 </div>
-              </ScrollReveal>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                
+                {story.type === 'add' ? (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center">
+                    <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center border-2 border-white mb-3 shadow-lg shadow-orange-500/30">
+                      <Plus className="w-6 h-6 text-white" />
+                    </div>
+                    <p className="text-white font-black text-xs uppercase tracking-wider">{story.title}</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="absolute top-4 left-4 w-9 h-9 rounded-full border-2 border-orange-500 p-0.5 animate-border-pulse shadow-lg">
+                      <img src={story.avatar} alt="avatar" className="w-full h-full object-cover rounded-full" />
+                    </div>
+                    <p className="absolute bottom-4 left-4 text-white font-black text-xs uppercase tracking-wider">{story.title}</p>
+                  </>
+                )}
+              </div>
             ))}
           </div>
         </div>
