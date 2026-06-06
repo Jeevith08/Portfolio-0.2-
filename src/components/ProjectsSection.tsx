@@ -76,146 +76,121 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
     }
   ];
 
-  const handlePrev = () => {
-    setCurrent((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
-  };
-  const handleNext = () => {
-    setCurrent((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
-  };
-
   return (
     <>
       <section
         id="projects"
-        className={`relative py-20 px-6 min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-300 ${
-          darkMode ? 'bg-gradient-to-b from-black via-zinc-950 to-black' : 'bg-gradient-to-b from-white via-orange-50/10 to-white'
+        className={`relative py-24 px-6 min-h-screen flex flex-col items-center justify-center overflow-hidden transition-colors duration-300 ${
+          darkMode ? 'bg-gradient-to-b from-[#180A0E] via-[#33111A] to-[#180A0E]' : 'bg-[#B45060]'
         }`}
       >
         {/* Background Giant Marquee */}
-        <div className={`absolute top-1/4 left-0 w-full overflow-hidden opacity-5 select-none pointer-events-none tracking-widest ${
-          darkMode ? 'text-white' : 'text-orange-900'
-        }`}>
-          <div className="animate-marquee whitespace-nowrap text-[8vw] font-black uppercase">
-            MY WORK • FEATURED PROJECTS • MOBILE APPS • WEB PORTFOLIOS • &nbsp; MY WORK • FEATURED PROJECTS • MOBILE APPS • WEB PORTFOLIOS • &nbsp;
+        <div className="absolute inset-0 flex flex-col justify-center gap-12 opacity-10 select-none pointer-events-none uppercase font-black text-6xl md:text-8xl tracking-widest text-black">
+          <div className="animate-marquee whitespace-nowrap">
+            MY WORK • FEATURED PROJECTS • APPS • PORTFOLIOS • &nbsp; MY WORK • FEATURED PROJECTS • APPS • PORTFOLIOS • &nbsp;
+          </div>
+          <div className="animate-marquee whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
+            MOBILE DEVELOPMENT • DESIGN • WEB APPS • INTERNSHIPS • &nbsp; MOBILE DEVELOPMENT • DESIGN • WEB APPS • INTERNSHIPS • &nbsp;
           </div>
         </div>
 
-        <div className="max-w-2xl w-full mx-auto relative z-10 min-h-[420px] flex flex-col items-center justify-center">
-          <div className="text-center mb-12">
-            <h3 className="text-xs font-black tracking-widest uppercase bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent flex items-center justify-center gap-2"><Briefcase className="w-5 h-5" /> My Work</h3>
-            <h2 className={`text-xl md:text-2xl font-black tracking-tight uppercase text-center mb-6 flex items-center justify-center gap-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}><Star className="w-5 h-5" /> Featured Projects</h2>
+        <div className="max-w-6xl w-full mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Briefcase className="w-5 h-5 text-white animate-bounce" />
+              <h2 className="text-xs font-black tracking-widest uppercase text-white/80">
+                My Portfolio
+              </h2>
+            </div>
+            <h2 className="text-2xl md:text-4xl font-black tracking-tight uppercase text-white">
+              Featured Projects
+            </h2>
           </div>
-          <div className="relative w-full h-[280px] flex items-center justify-center">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 p-2">
             {projects.map((project, index) => {
-              // Calculate offset for stacking
-              const offset = index - current;
-              const isActive = index === current;
+              const cardColors = [
+                'bg-[#FF5A1F]', // Orange
+                'bg-[#8233C5]', // Purple
+                'bg-[#00A896]', // Emerald
+                'bg-[#0096C7]', // Blue
+                'bg-[#E0115F]', // Ruby Red
+                'bg-[#F2A600]', // Amber Yellow
+                'bg-[#0077B6]', // Deep Blue
+              ];
+              const rotationClass = [
+                '-rotate-3',
+                'rotate-3',
+                '-rotate-2',
+                'rotate-2',
+                '-rotate-4',
+                'rotate-4',
+                '-rotate-1',
+              ][index % 7];
+
+              const cardColor = cardColors[index % cardColors.length];
+
               return (
-                <div
-                  key={project.id}
-                  className={`absolute left-1/2 top-0 w-[92%] max-w-[340px] transition-all duration-500 ease-in-out ${
-                    isActive
-                      ? 'z-30 scale-100 opacity-100 shadow-2xl'
-                      : offset === -1
-                        ? 'z-20 scale-95 opacity-70 -translate-x-[60%] translate-y-5 blur-[1.2px]'
-                        : offset === 1
-                          ? 'z-20 scale-95 opacity-70 translate-x-[60%] translate-y-5 blur-[1.2px]'
-                          : 'z-10 scale-90 opacity-0 pointer-events-none'
-                  }`} 
-                  style={{
-                      height: 280,
-                    background: darkMode ? '#121212' : '#ffffff',
-                    transform: `translate(-50%, 0) ${
-                      offset === -1
-                          ? 'scale(0.95) translateX(-60%) translateY(20px)'
-                        : offset === 1
-                          ? 'scale(0.95) translateX(60%) translateY(20px)'
-                        : offset === 0
-                        ? 'scale(1) translateX(0) translateY(0)'
-                        : 'scale(0.9) translateY(0)'
-                    }`,
-                    transition: 'all 0.5s cubic-bezier(.23,1.12,.67,.99)',
-                  }}
-                >
-                  <ScrollReveal direction="up">
-                    <div className={`group rounded-2xl overflow-hidden transition-all duration-500 shadow-xl border ${darkMode ? 'bg-[#121212] border-orange-100/20' : 'bg-white border-orange-100/10'}`}>
-                      <div className={`relative overflow-hidden rounded-t-2xl h-28 flex items-center justify-center ${darkMode ? 'bg-gray-950' : 'bg-orange-50/50'}`}>
-                        <img 
-                          src={project.image} 
+                <ScrollReveal key={project.id} direction="up">
+                  <div
+                    className={`group relative ${cardColor} border-[12px] border-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out hover:rotate-0 hover:scale-105 hover:z-20 ${rotationClass} p-6 flex flex-col justify-between min-h-[420px]`}
+                  >
+                    <div>
+                      {/* Image Frame */}
+                      <div className="w-full h-44 md:h-48 overflow-hidden rounded-2xl border-4 border-white mb-6 bg-white flex items-center justify-center">
+                        <img
+                          src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
-                        <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-orange-900/70 via-orange-200/10' : 'from-orange-100/60 via-orange-50/10'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                        <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="px-2.5 py-1 bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 text-white text-xs rounded-full shadow">{project.category}</span>
-                        </div>
                       </div>
-                      <div className="p-4 text-left">
-                        <h3 className={`text-lg font-bold mb-2 bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 bg-clip-text text-transparent`}>{project.title}</h3>
-                        <p className={`text-sm mb-3 leading-normal ${darkMode ? 'text-orange-100/90' : 'text-orange-900/90'}`}>{project.description}</p>
-                        <div className="flex flex-wrap gap-1.5 mb-3">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              onClick={() => {
-                                setActiveTech(tech);
-                                setTimeout(() => setActiveTech(null), 300);
-                              }}
-                              onTouchStart={() => {
-                                setActiveTech(tech);
-                                setTimeout(() => setActiveTech(null), 300);
-                              }}
-                              className={`px-2.5 py-1 text-xs rounded-full shadow border-0 font-medium transition-colors duration-150 cursor-pointer
-                              ${activeTech === tech
-                                ? 'animate-pulse bg-orange-500 text-white'
-                                : darkMode
-                                  ? 'bg-white text-orange-900'
-                                  : 'bg-white text-orange-700'}
-                            `}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                        <div className="mt-4 flex justify-center">
-                          <div className="relative rounded-full p-0.5 bg-gradient-to-r from-orange-100 via-red-500 to-orange-500 animate-border-spin">
-                            <a
-                              href={project.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title="View on GitHub"
-                              className="inline-flex items-center justify-center rounded-full bg-black p-3 text-white transition-all duration-300 animate"
-                            >
-                              <Github className="w-5 h-5" />
-                            </a>
-                          </div>
-                        </div>
+                      
+                      <h3 className="text-xl font-black uppercase tracking-tight text-white mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-white/90 text-xs font-semibold leading-relaxed mb-6">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div>
+                      {/* Tech Badges */}
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {project.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className="bg-white/20 text-white border border-white/35 text-[9px] uppercase font-black py-1 px-3 rounded-full tracking-wider"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* GitHub Button */}
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] font-black uppercase text-white/75 tracking-wider">
+                          {project.category}
+                        </span>
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 bg-white hover:bg-zinc-100 text-black rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110"
+                          title="View on GitHub"
+                        >
+                          <Github className="w-5 h-5" />
+                        </a>
                       </div>
                     </div>
-                  </ScrollReveal>
-                </div>
+                  </div>
+                </ScrollReveal>
               );
             })}
-            {/* Navigation Buttons */}
-            <button
-              onClick={handlePrev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-orange-500 transition-all"
-              aria-label="Previous Project"
-            >
-              <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <button
-              onClick={handleNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-orange-500 transition-all"
-              aria-label="Next Project"
-            >
-              <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
           </div>
         </div>
       </section>
-      {/* Themed gap to Contact section */}
-      <div className={`w-full bg-transparent transition-colors duration-300`} style={{height: '8rem'}}></div>
+      {/* Spacer to align Contact Section */}
+      <div className="w-full h-16 bg-transparent" />
     </>
   );
 };
