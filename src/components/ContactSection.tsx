@@ -94,7 +94,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
           <img 
             src={`${import.meta.env.BASE_URL}developer_3d_avatar.png`} 
             alt="Developer Standing" 
-            className="h-64 md:h-80 object-contain animate-float-gentle"
+            className="h-64 md:h-80 object-contain animate-float-gentle mix-blend-multiply"
           />
         </div>
 
