@@ -56,7 +56,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
       {/* Background Giant Marquee */}
       <div className="absolute inset-0 flex flex-col justify-center gap-8 opacity-10 select-none pointer-events-none uppercase font-black text-6xl md:text-8xl tracking-widest text-black">
         <div className="animate-marquee whitespace-nowrap">
-          JEEVITH PALANI • FLUTTER DEVELOPER • PYTHON DEVELOPER • DATA ANALYST • &nbsp; JEEVITH PALANI • FLUTTER DEVELOPER • PYTHON DEVELOPER • DATA ANALYST • &nbsp;
+          JEEVITH PALANI • SOFTWARE DEVELOPER • FLUTTER DEVELOPER • PYTHON DEVELOPER • DATA ANALYST • &nbsp; JEEVITH PALANI • SOFTWARE DEVELOPER • FLUTTER DEVELOPER • PYTHON DEVELOPER • DATA ANALYST • &nbsp;
         </div>
         <div className="animate-marquee whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
           FOLLOW ON INSTAGRAM • GET IN TOUCH • LET'S COLLABORATE • &nbsp; FOLLOW ON INSTAGRAM • GET IN TOUCH • LET'S COLLABORATE • &nbsp;

@@ -44,7 +44,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
   
   const sparkles = useMemo(() => {
     return Array.from({ length: 30 }).map((_, i) => {
-      const colors = ['#E5B53B', '#FF4500', '#22c55e'];
+      const colors = ['#F97316', '#F59E0B', '#EF4444'];
       return {
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
@@ -57,15 +57,25 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0D2218] via-[#020805] to-black z-50 flex items-center justify-center overflow-hidden">
-      {/* Background Grid Lines to enhance the sci-fi look */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(229,181,59,0.02)_1px,_transparent_1px),_linear-gradient(90deg,_rgba(229,181,59,0.02)_1px,_transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+    <div className="fixed inset-0 bg-[#08130E] z-50 flex items-center justify-center overflow-hidden">
+      {/* Giant low-contrast background text */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
+        <div 
+          className="text-[25vw] font-black text-[#0c2016] tracking-widest leading-none uppercase select-none opacity-50"
+          style={{ fontFamily: "'Orbitron', sans-serif" }}
+        >
+          LOAD
+        </div>
+      </div>
+
+      {/* Subtle warm orange glow behind the loader */}
+      <div className="absolute w-[450px] h-[450px] rounded-full bg-orange-500/5 blur-[120px] pointer-events-none z-0" />
 
       {/* Sparkles / Ambient Particles */}
       {sparkles.map((sparkle, i) => (
         <div
           key={i}
-          className="absolute rounded-full"
+          className="absolute rounded-full z-10"
           style={{
             left: sparkle.left,
             top: sparkle.top,
@@ -82,17 +92,17 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
         {/* Holographic Concentric Circles */}
         <div className="relative w-44 h-44 flex items-center justify-center">
           {/* Outer Dashed Rotating Ring */}
-          <div className="absolute w-40 h-40 rounded-full border border-dashed border-[#E5B53B]/25 animate-[spin_12s_linear_infinite]" />
+          <div className="absolute w-40 h-40 rounded-full border border-dashed border-orange-500/20 animate-[spin_16s_linear_infinite]" />
           
           {/* Middle Rotating Segment Ring */}
-          <div className="absolute w-36 h-36 rounded-full border border-[#22c55e]/20 border-t-transparent border-b-transparent animate-[spin_6s_linear_infinite_reverse]" />
+          <div className="absolute w-36 h-36 rounded-full border border-amber-500/25 border-t-transparent border-b-transparent animate-[spin_8s_linear_infinite_reverse]" />
 
           {/* SVG Progress Ring */}
           <svg className="absolute w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
             <defs>
-              <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FF4500" />
-                <stop offset="100%" stopColor="#E5B53B" />
+              <linearGradient id="cyber-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#F59E0B" />
+                <stop offset="100%" stopColor="#F97316" />
               </linearGradient>
               <filter id="hologram-glow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
@@ -106,14 +116,14 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
             <path
               d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
               fill="none"
-              stroke="rgba(229, 181, 59, 0.08)"
+              stroke="rgba(249, 115, 22, 0.08)"
               strokeWidth="1.5"
             />
             {/* Active progress circle */}
             <path
               d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
               fill="none"
-              stroke="url(#gold-gradient)"
+              stroke="url(#cyber-gradient)"
               strokeWidth="2"
               strokeDasharray={`${progress}, 100`}
               strokeLinecap="round"
@@ -123,24 +133,29 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           </svg>
 
           {/* Center Content: Percentage */}
-          <div className="absolute flex flex-col items-center justify-center">
-            <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-[#E5B53B] font-sans tracking-tight drop-shadow-[0_0_12px_rgba(229,181,59,0.3)]">
-              {Math.floor(progress)}%
+          <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+            <div className="flex items-baseline justify-center">
+              <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 drop-shadow-[0_0_12px_rgba(249,115,22,0.35)] leading-none">
+                {Math.floor(progress)}
+              </span>
+              <span className="text-xs font-black text-orange-400 ml-0.5 select-none">
+                %
+              </span>
             </div>
-            <div className="text-[10px] text-[#22c55e]/70 font-sans font-bold uppercase tracking-widest mt-1">
+            <div className="text-[9px] text-orange-400/80 font-bold uppercase tracking-[0.2em] mt-2" style={{ fontFamily: "'Share Tech Mono', monospace" }}>
               Loading
             </div>
           </div>
         </div>
         
         {/* Dynamic Status Initialization Message */}
-        <div className="min-h-[24px] mt-8 flex flex-col items-center">
-          <div className="text-zinc-200 font-sans text-sm tracking-wide font-semibold drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]">
+        <div className="min-h-[24px] mt-8 flex flex-col items-center" style={{ fontFamily: "'Share Tech Mono', monospace" }}>
+          <div className="text-zinc-300 text-xs tracking-widest font-semibold uppercase drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]">
             {currentStatus}
           </div>
-          <div className="w-24 h-[2px] bg-[#E5B53B]/20 rounded-full mt-3 overflow-hidden">
+          <div className="w-24 h-[1.5px] bg-orange-500/10 rounded-full mt-3 overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-orange-500 to-[#E5B53B] transition-all duration-100 ease-out"
+              className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-100 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -148,6 +163,8 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
       </div>
 
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+        
         @keyframes sparkle-fade {
           0%, 100% {
             opacity: 0.1;

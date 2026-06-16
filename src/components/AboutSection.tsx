@@ -84,7 +84,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
 
           <p className={`text-sm md:text-base leading-relaxed mb-8 ${darkMode ? 'text-zinc-300' : 'text-gray-700'
             }`}>
-            Engineering modern cross-platform mobile experiences and intelligent systems. I am Jeevith, a passionate Mobile Developer and Computer Science Engineering student at SNS College of Engineering. With expertise in Flutter, Dart, Python, REST API, and Power BI, I build cross-platform mobile apps, interactive web tools, and data-driven dashboards.
+            Engineering modern software solutions, cross-platform mobile experiences, and intelligent systems. I am Jeevith, a passionate Software and Flutter Developer, and a Computer Science Engineering student at SNS College of Engineering. With expertise in Flutter, Dart, Python, REST API, and Power BI, I build cross-platform mobile apps, interactive web tools, and data-driven dashboards.
           </p>
 
           {/* Stats Grid */}

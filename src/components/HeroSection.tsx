@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowDown, Download, Mail, Volume2, VolumeX } from 'lucide-react';
+import { ArrowDown, Download, Mail, Volume2, VolumeX, X } from 'lucide-react';
 
 interface HeroSectionProps {
   darkMode: boolean;
@@ -7,11 +7,27 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
-  const titles = ["Flutter Developer", "Python"];
+  const titles = ["Software Developer", "Flutter Developer", "Python"];
   const [typedText, setTypedText] = useState('');
   const [titleIndex, setTitleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+
+  const handleDownloadResume = (type: 'app' | 'software') => {
+    const link = document.createElement('a');
+    if (type === 'app') {
+      link.href = `${import.meta.env.BASE_URL}JEEVITH RESUME APP -UD.pdf`;
+      link.download = 'JEEVITH RESUME APP -UD.pdf';
+    } else {
+      link.href = `${import.meta.env.BASE_URL}JEEVITH RESUME UD.pdf`;
+      link.download = 'JEEVITH RESUME UD.pdf';
+    }
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setShowDownloadModal(false);
+  };
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(false); // Default to unmuted to attempt playing audio on load
@@ -170,9 +186,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
             <Mail className="w-3.5 h-3.5" />
             Contact Me
           </button>
-          <a
-            href={`${import.meta.env.BASE_URL}JEEVI resume.pdf.pdf`}
-            download
+          <button
+            onClick={() => setShowDownloadModal(true)}
             className={`px-6 py-2.5 border-2 rounded-full font-bold tracking-wider uppercase text-[10px] transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 ${darkMode
               ? 'border-white text-white hover:bg-white hover:text-black'
               : 'border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white'
@@ -180,7 +195,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
           >
             <Download className="w-3.5 h-3.5" />
             Download CV
-          </a>
+          </button>
         </div>
 
         {/* HUD Stats */}
@@ -220,6 +235,196 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
       >
         {isMuted ? <VolumeX className="w-7 h-7 md:w-8 md:h-8" /> : <Volume2 className="w-7 h-7 md:w-8 md:h-8 animate-pulse" />}
       </button>
+      {/* Resume Selection Modal with custom water effects */}
+      {showDownloadModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/75 backdrop-blur-md transition-opacity duration-300"
+            onClick={() => setShowDownloadModal(false)}
+          />
+          
+          {/* Dialog Card */}
+          <div className={`relative w-full max-w-lg rounded-[2.5rem] p-8 md:p-10 overflow-hidden border transition-all duration-300 transform scale-100 ${
+            darkMode 
+              ? 'bg-[#0d1c15]/95 border-emerald-500/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]' 
+              : 'bg-white/95 border-zinc-200 shadow-[0_20px_50px_rgba(0,0,0,0.15)]'
+          }`}>
+            <style>{`
+              @keyframes wave-move-left {
+                0% { transform: translateX(0); }
+                50% { transform: translateX(-25%); }
+                100% { transform: translateX(-50%); }
+              }
+              @keyframes wave-move-right {
+                0% { transform: translateX(-50%); }
+                50% { transform: translateX(-25%); }
+                100% { transform: translateX(0); }
+              }
+              .animate-wave-slow {
+                animation: wave-move-left 14s linear infinite;
+              }
+              .animate-wave-fast {
+                animation: wave-move-right 8s linear infinite;
+              }
+              .wave-card {
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+              }
+              .wave-card .wave-bg {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 200%;
+                height: 35%;
+                transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 0;
+                pointer-events: none;
+              }
+              .wave-card:hover .wave-bg {
+                height: 75%;
+              }
+              .wave-card .wave-content {
+                position: relative;
+                z-index: 10;
+              }
+            `}</style>
+
+            {/* Background soft glow */}
+            <div className="absolute -top-20 -left-20 w-48 h-48 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Close button */}
+            <button 
+              onClick={() => setShowDownloadModal(false)}
+              className={`absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-200 z-[100] ${
+                darkMode 
+                  ? 'border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/50' 
+                  : 'border-zinc-200 hover:border-zinc-300 text-zinc-500 hover:text-black bg-zinc-100/50'
+              }`}
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            {/* Header */}
+            <div className="mb-8 relative z-10">
+              <h3 className={`text-xl md:text-2xl font-black uppercase tracking-wider mb-2 ${
+                darkMode ? 'text-white' : 'text-zinc-900'
+              }`}>
+                Choose Resume Version
+              </h3>
+              <p className={`text-xs md:text-sm font-semibold leading-relaxed px-4 ${
+                darkMode ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>
+                Select the version that matches the job requirements.
+              </p>
+            </div>
+
+            {/* Options Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 relative z-10">
+              
+              {/* App Developer Option */}
+              <div 
+                onClick={() => handleDownloadResume('app')}
+                className={`wave-card group rounded-3xl p-6 h-36 flex flex-col justify-between border ${
+                  darkMode 
+                    ? 'bg-[#102920]/80 border-teal-500/30 hover:border-teal-400 shadow-lg shadow-teal-500/5' 
+                    : 'bg-teal-50/20 border-teal-500/30 hover:border-teal-400 shadow-lg shadow-teal-500/5'
+                }`}
+              >
+                <div className="wave-content text-left">
+                  <span className="text-[10px] font-black tracking-widest uppercase text-teal-400 mb-1 block">
+                    Mobile Focus
+                  </span>
+                  <h4 className={`text-base font-black uppercase tracking-wide group-hover:text-teal-300 transition-colors duration-300 ${
+                    darkMode ? 'text-white' : 'text-zinc-900'
+                  }`}>
+                    App Developer
+                  </h4>
+                </div>
+                
+                <div className="wave-content flex justify-between items-center mt-2">
+                  <span className={`text-[9px] font-black uppercase tracking-wider ${
+                    darkMode ? 'text-zinc-500 group-hover:text-teal-300' : 'text-zinc-400 group-hover:text-teal-700'
+                  }`}>
+                    PDF • 43 KB
+                  </span>
+                  <div className="w-8 h-8 rounded-full bg-teal-500/10 text-teal-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Download className="w-4 h-4" />
+                  </div>
+                </div>
+
+                {/* Teal Waves */}
+                <div className="wave-bg">
+                  <svg className="absolute bottom-0 left-0 w-[200%] h-14 text-teal-500/15 fill-current animate-wave-slow" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1350,20 1500,60 L1500,120 L0,120 Z" />
+                  </svg>
+                  <svg className="absolute bottom-0 left-0 w-[200%] h-10 text-teal-400/25 fill-current animate-wave-fast" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,60 C150,20 300,100 500,60 C700,20 900,100 1000,60 C1100,20 1300,100 1500,60 L1500,120 L0,120 Z" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Software Developer Option */}
+              <div 
+                onClick={() => handleDownloadResume('software')}
+                className={`wave-card group rounded-3xl p-6 h-36 flex flex-col justify-between border ${
+                  darkMode 
+                    ? 'bg-[#1b2210]/80 border-orange-500/30 hover:border-orange-400 shadow-lg shadow-orange-500/5' 
+                    : 'bg-orange-50/20 border-orange-500/30 hover:border-orange-400 shadow-lg shadow-orange-500/5'
+                }`}
+              >
+                <div className="wave-content text-left">
+                  <span className="text-[10px] font-black tracking-widest uppercase text-orange-400 mb-1 block">
+                    General Focus
+                  </span>
+                  <h4 className={`text-base font-black uppercase tracking-wide group-hover:text-orange-300 transition-colors duration-300 ${
+                    darkMode ? 'text-white' : 'text-zinc-900'
+                  }`}>
+                    Software Dev
+                  </h4>
+                </div>
+                
+                <div className="wave-content flex justify-between items-center mt-2">
+                  <span className={`text-[9px] font-black uppercase tracking-wider ${
+                    darkMode ? 'text-zinc-500 group-hover:text-orange-300' : 'text-zinc-400 group-hover:text-orange-700'
+                  }`}>
+                    PDF • 45 KB
+                  </span>
+                  <div className="w-8 h-8 rounded-full bg-orange-500/10 text-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Download className="w-4 h-4" />
+                  </div>
+                </div>
+
+                {/* Orange Waves */}
+                <div className="wave-bg">
+                  <svg className="absolute bottom-0 left-0 w-[200%] h-14 text-orange-500/15 fill-current animate-wave-slow" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1350,20 1500,60 L1500,120 L0,120 Z" />
+                  </svg>
+                  <svg className="absolute bottom-0 left-0 w-[200%] h-10 text-orange-400/25 fill-current animate-wave-fast" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,60 C150,20 300,100 500,60 C700,20 900,100 1000,60 C1100,20 1300,100 1500,60 L1500,120 L0,120 Z" />
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Cancel Button */}
+            <button 
+              onClick={() => setShowDownloadModal(false)}
+              className={`w-full py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border relative z-10 ${
+                darkMode 
+                  ? 'border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white bg-zinc-900/20' 
+                  : 'border-zinc-200 hover:border-zinc-300 text-zinc-600 hover:text-zinc-900 bg-zinc-50'
+              }`}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
